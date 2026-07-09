@@ -165,7 +165,7 @@ window.updateNavigationLinks = function() {
       });
       // Optionally normalize scroll on touch devices to prevent lag
       if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        ScrollTrigger.normalizeScroll(true);
+        // ScrollTrigger.normalizeScroll(true);
       }
       console.log("GSAP ScrollTrigger configured with performance optimizations.");
     } else {
