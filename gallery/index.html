@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../wp-content/themes/captura/assets/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" />
+  <link rel="stylesheet" href="../use.typekit.net/lig7ycz.css">
+  <link rel="stylesheet" href="../wp-content/themes/captura/assets/css/app31fb.css?ver=41" type="text/css" media="all" />
+  <title>Gallery | CAPTURA</title>
+  <meta name="description" content="Public gallery for CAPTURA. View submissions, vote with likes, and engage with the photographers through comments.">
+  <style>
+    /* Gallery Grid & Filters styling */
+    .p-gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10rem 15rem;
+      margin: 30rem 0 40rem;
+    }
+    .c-filter-btn {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 6rem 18rem;
+      color: #aaa;
+      font-size: 13rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+    .c-filter-btn:hover, .c-filter-btn.is-active {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+    
+    .p-gallery-search {
+      max-width: 500rem;
+      margin: 0 auto 30rem;
+      position: relative;
+    }
+    .p-gallery-search-input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 30px;
+      padding: 10rem 20rem;
+      color: #fff;
+      font-size: 14rem;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+      text-align: center;
+      font-family: inherit;
+    }
+    .p-gallery-search-input:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.4);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+
+    .p-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30rem;
+    }
+    @media (max-width: 900px) {
+      .p-gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .p-gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 20rem;
+      }
+    }
+    
+    .c-gallery-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .c-gallery-card:hover {
+      transform: translateY(-5rem);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .c-gallery-card__img-wrap {
+      width: 100%;
+      height: 260rem;
+      overflow: hidden;
+      background: #111;
+    }
+    .c-gallery-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .c-gallery-card:hover .c-gallery-card__img {
+      transform: scale(1.05);
+    }
+    .c-gallery-card__body {
+      padding: 16rem 20rem;
+    }
+    .c-gallery-card__division {
+      font-size: 10rem;
+      color: #ccc;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2rem 8rem;
+      display: inline-block;
+      border-radius: 10px;
+      margin-bottom: 8rem;
+    }
+    .c-gallery-card__title {
+      font-size: 16rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 6rem;
+      line-height: 1.4;
+    }
+    .c-gallery-card__uploader {
+      font-size: 12rem;
+      color: #888;
+      margin-bottom: 12rem;
+    }
+    .c-gallery-card__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 12rem;
+      font-size: 13rem;
+      color: #aaa;
+    }
+    
+    /* Interactive Modal overlay */
+    .c-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.92);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      padding: 20rem;
+      box-sizing: border-box;
+      backdrop-filter: blur(10px);
+    }
+    .c-modal-container {
+      background: rgba(15, 15, 15, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      width: 100%;
+      max-width: 1100rem;
+      height: 90vh;
+      border-radius: 4px;
+      display: grid;
+      grid-template-columns: 1.3fr 0.9fr;
+      overflow: hidden;
+      position: relative;
+      animation: modalFadeIn 0.4s ease;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8);
+    }
+    @media (max-width: 850px) {
+      .c-modal-container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+        height: 95vh;
+      }
+    }
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .c-modal-close {
+      position: absolute;
+      top: 15rem;
+      right: 15rem;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 16rem;
+      width: 36rem;
+      height: 36rem;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      transition: all 0.3s;
+    }
+    .c-modal-close:hover {
+      background: #fff;
+      color: #000;
+      border-color: #fff;
+    }
+    .c-modal-photo-side {
+      background: #090909;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20rem;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+    @media (max-width: 850px) {
+      .c-modal-photo-side {
+        height: 350rem;
+      }
+    }
+    .c-modal-photo {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .c-modal-info-side {
+      border-left: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      background: rgba(20, 20, 20, 0.5);
+    }
+    @media (max-width: 850px) {
+      .c-modal-info-side {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        height: auto;
+        overflow: visible;
+      }
+    }
+    .c-modal-info-scroll {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 30rem;
+    }
+    .c-modal-heading {
+      font-size: 24rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8rem;
+      line-height: 1.3;
+    }
+    .c-modal-division {
+      font-size: 11rem;
+      color: #ccc;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 2rem 8rem;
+      display: inline-block;
+      border-radius: 10px;
+      margin-bottom: 16rem;
+    }
+    .c-modal-desc {
+      font-size: 14rem;
+      color: #ccc;
+      line-height: 1.7;
+      margin-bottom: 24rem;
+      padding-bottom: 20rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    
+    .c-modal-uploader-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 4px;
+      padding: 16rem;
+      margin-bottom: 24rem;
+    }
+    .c-modal-uploader-title {
+      font-size: 11rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4rem;
+    }
+    .c-modal-uploader-name {
+      font-size: 16rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8rem;
+      display: flex;
+      align-items: center;
+      gap: 10rem;
+    }
+    .c-modal-uploader-social {
+      font-size: 12rem;
+      color: #aaa;
+      text-decoration: underline;
+      display: inline-flex;
+      align-items: center;
+      gap: 4rem;
+    }
+    .c-modal-uploader-bio {
+      font-size: 13rem;
+      color: #aaa;
+      line-height: 1.6;
+      margin-top: 8rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+      padding-top: 8rem;
+    }
+
+    .c-modal-actions {
+      display: flex;
+      align-items: center;
+      gap: 20rem;
+      margin-bottom: 24rem;
+      padding-bottom: 20rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .c-like-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      border-radius: 20px;
+      padding: 8rem 20rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8rem;
+      font-size: 13rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .c-like-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    .c-like-btn.has-liked {
+      background: rgba(235, 87, 87, 0.1);
+      border-color: rgba(235, 87, 87, 0.4);
+      color: #eb5757;
+    }
+    
+    /* Comments section */
+    .c-comments-title {
+      font-size: 16rem;
+      color: #fff;
+      font-weight: 600;
+      margin-bottom: 15rem;
+    }
+    .c-comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12rem;
+      max-height: 250rem;
+      overflow-y: auto;
+      margin-bottom: 20rem;
+      padding-right: 5rem;
+    }
+    .c-comment-item {
+      background: rgba(255, 255, 255, 0.01);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 10rem 12rem;
+      border-radius: 2px;
+    }
+    .c-comment-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11rem;
+      color: #888;
+      margin-bottom: 4rem;
+    }
+    .c-comment-author {
+      color: #aaa;
+      font-weight: 600;
+    }
+    .c-comment-text {
+      font-size: 13rem;
+      color: #ccc;
+      line-height: 1.5;
+      word-break: break-all;
+    }
+    .c-comment-empty {
+      color: #666;
+      font-size: 12rem;
+      text-align: center;
+      padding: 15rem 0;
+    }
+    
+    .c-comment-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10rem;
+    }
+    .c-comment-input {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 8rem 12rem;
+      font-size: 13rem;
+      border-radius: 2px;
+      font-family: inherit;
+    }
+    .c-comment-input:focus {
+      outline: none;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+    
+    .p-empty-gallery {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #888;
+      font-size: 16rem;
+      padding: 80rem 0;
+      border: 1px dashed rgba(255, 255, 255, 0.08);
+    }
+  </style>
+</head>
+
+<body class="page-template page-template-page-whats-ykp">
+  <div class="l-wrapper" data-barba="wrapper" aria-live="polite">
+    <div id="WebGL" class="c-background"></div>
+    
+    <div class="__container" data-barba="container" data-barba-namespace="whats">
+      <header class="l-header">
+        <div class="l-header__inner">
+          <a href="../index.html" class="l-header__logo" style="text-decoration:none; text-decoration:none;">
+      <img src="../wp-content/themes/captura/assets/images/common/captura-logo.png" alt="CAPTURA">
+    </a>
+          <nav class="l-header__nav">
+            <ul class="l-header__ul">
+        <li class="l-header__list u-en" data-hover-target data-page-name="home"><a href="../index.html" data-hover-target-text>Home</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="about"><a href="../about/index.html" data-hover-target-text>About</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="prizes"><a href="../prizes/index.html" data-hover-target-text>Prizes</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="schedule"><a href="../schedule/index.html" data-hover-target-text>Schedule</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="jury"><a href="../jury/index.html" data-hover-target-text>Jury</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="registration"><a href="../registration/index.html" data-hover-target-text>Login / Register</a></li>
+        <li class="l-header__list u-en is-current" data-hover-target data-page-name="gallery"><a href="../gallery/index.html" data-hover-target-text>Gallery</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="contact"><a href="../contact/index.html" data-hover-target-text>Contact</a></li>
+      </ul>
+            <div class="l-header__scales">
+              <div class="l-header__scale-side left"></div>
+              <div class="l-header__scale-side right"></div>
+              <span class="l-header__scales-line" style="left:6px"></span><span class="l-header__scales-line" style="left:12px"></span><span class="l-header__scales-line" style="left:18px"></span><span class="l-header__scales-line" style="left:24px"></span><span class="l-header__scales-line" style="left:30px"></span><span class="l-header__scales-line" style="left:36px"></span><span class="l-header__scales-line" style="left:42px"></span><span class="l-header__scales-line" style="left:48px"></span><span class="l-header__scales-line" style="left:54px"></span><span class="l-header__scales-line" style="left:60px"></span><span class="l-header__scales-line" style="left:66px"></span><span class="l-header__scales-line" style="left:72px"></span><span class="l-header__scales-line" style="left:78px"></span><span class="l-header__scales-line" style="left:84px"></span><span class="l-header__scales-line" style="left:90px"></span><span class="l-header__scales-line" style="left:96px"></span><span class="l-header__scales-line" style="left:102px"></span><span class="l-header__scales-line" style="left:108px"></span><span class="l-header__scales-line" style="left:114px"></span><span class="l-header__scales-line" style="left:120px"></span><span class="l-header__scales-line" style="left:126px"></span><span class="l-header__scales-line" style="left:132px"></span><span class="l-header__scales-line" style="left:138px"></span><span class="l-header__scales-line" style="left:144px"></span><span class="l-header__scales-line" style="left:150px"></span><span class="l-header__scales-line" style="left:156px"></span><span class="l-header__scales-line" style="left:162px"></span><span class="l-header__scales-line" style="left:168px"></span><span class="l-header__scales-line" style="left:174px"></span><span class="l-header__scales-line" style="left:180px"></span><span class="l-header__scales-line" style="left:186px"></span><span class="l-header__scales-line" style="left:192px"></span><span class="l-header__scales-line" style="left:198px"></span><span class="l-header__scales-line" style="left:204px"></span><span class="l-header__scales-line" style="left:210px"></span><span class="l-header__scales-line" style="left:216px"></span><span class="l-header__scales-line" style="left:222px"></span><span class="l-header__scales-line" style="left:228px"></span><span class="l-header__scales-line" style="left:234px"></span><span class="l-header__scales-line" style="left:240px"></span><span class="l-header__scales-line" style="left:246px"></span><span class="l-header__scales-line" style="left:252px"></span><span class="l-header__scales-line" style="left:258px"></span><span class="l-header__scales-line" style="left:264px"></span><span class="l-header__scales-line" style="left:270px"></span><span class="l-header__scales-line" style="left:276px"></span><span class="l-header__scales-line" style="left:282px"></span><span class="l-header__scales-line" style="left:288px"></span><span class="l-header__scales-line" style="left:294px"></span><span class="l-header__scales-line" style="left:300px"></span><span class="l-header__scales-line" style="left:306px"></span><span class="l-header__scales-line" style="left:312px"></span><span class="l-header__scales-line" style="left:318px"></span><span class="l-header__scales-line" style="left:324px"></span><span class="l-header__scales-line" style="left:330px"></span><span class="l-header__scales-line" style="left:336px"></span><span class="l-header__scales-line" style="left:342px"></span><span class="l-header__scales-line" style="left:348px"></span><span class="l-header__scales-line" style="left:354px"></span><span class="l-header__scales-line" style="left:360px"></span><span class="l-header__scales-line" style="left:366px"></span><span class="l-header__scales-line" style="left:372px"></span><span class="l-header__scales-line" style="left:378px"></span><span class="l-header__scales-line" style="left:384px"></span><span class="l-header__scales-line" style="left:390px"></span><span class="l-header__scales-line" style="left:396px"></span><span class="l-header__scales-line" style="left:402px"></span><span class="l-header__scales-line" style="left:408px"></span><span class="l-header__scales-line" style="left:414px"></span><span class="l-header__scales-line" style="left:420px"></span><span class="l-header__scales-line" style="left:426px"></span><span class="l-header__scales-line" style="left:432px"></span><span class="l-header__scales-line" style="left:438px"></span><span class="l-header__scales-line" style="left:444px"></span><span class="l-header__scales-line" style="left:450px"></span><span class="l-header__scales-line" style="left:456px"></span><span class="l-header__scales-line" style="left:462px"></span><span class="l-header__scales-line" style="left:468px"></span><span class="l-header__scales-line" style="left:474px"></span><span class="l-header__scales-line" style="left:480px"></span><span class="l-header__scales-line" style="left:486px"></span><span class="l-header__scales-line" style="left:492px"></span><span class="l-header__scales-line" style="left:498px"></span><span class="l-header__scales-line" style="left:504px"></span><span class="l-header__scales-line" style="left:510px"></span><span class="l-header__scales-line" style="left:516px"></span><span class="l-header__scales-line" style="left:522px"></span><span class="l-header__scales-line" style="left:528px"></span><span class="l-header__scales-line" style="left:534px"></span><span class="l-header__scales-line" style="left:540px"></span><span class="l-header__scales-line" style="left:546px"></span><span class="l-header__scales-line" style="left:552px"></span><span class="l-header__scales-line" style="left:558px"></span><span class="l-header__scales-line" style="left:564px"></span><span class="l-header__scales-line" style="left:570px"></span><span class="l-header__scales-line" style="left:576px"></span><span class="l-header__scales-line" style="left:582px"></span><span class="l-header__scales-line" style="left:588px"></span><span class="l-header__scales-line" style="left:594px"></span><span class="l-header__scales-line" style="left:600px"></span><span class="l-header__scales-line" style="left:606px"></span><span class="l-header__scales-line" style="left:612px"></span><span class="l-header__scales-line" style="left:618px"></span>
+            </div>
+          </nav>
+          <div class="l-header__scale-area"></div>
+        </div>
+      </header>
+      
+      <button class="l-menu-button">
+        <span class="l-menu-button__text u-en-sub">Menu</span>
+        <span class="l-menu-button__line">
+          <span></span><span></span><span></span><span></span>
+        </span>
+      </button>
+      
+      <div class="l-menu-body">
+        <div class="l-menu-body__inner">
+          <ul class="l-menu-body__ul">
+      <li class="l-menu-body__list">
+        <a href="../index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Home</p>
+          <p class="l-menu-body__link-ja">Welcome</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../about/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">About</p>
+          <p class="l-menu-body__link-ja">The Event</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../prizes/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Prizes</p>
+          <p class="l-menu-body__link-ja">Themes & Awards</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../schedule/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Schedule</p>
+          <p class="l-menu-body__link-ja">Agenda & Workshops</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../jury/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Jury</p>
+          <p class="l-menu-body__link-ja">Jury Panel</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../registration/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Login / Register</p>
+          <p class="l-menu-body__link-ja">Log In / Sign Up</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../gallery/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Gallery</p>
+          <p class="l-menu-body__link-ja">Public Gallery</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../contact/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Contact</p>
+          <p class="l-menu-body__link-ja">Get In Touch</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+    </ul>
+        </div>
+      </div>
+
+      <main class="l-main">
+        <div class="p-whats">
+          <div class="p-whats-hero">
+            <h1 class="p-whats-hero__heading u-en">PUBLIC GALLERY</h1>
+            <p class="p-whats-hero__heading-ja">Contest Submissions</p>
+          </div>
+
+          <div class="p-whats__inner" style="max-width: 1200px; margin: 0 auto; padding: 60px 24px;">
+            
+            <!-- Search bar -->
+            <div class="p-gallery-search">
+              <input type="text" id="gallerySearch" class="p-gallery-search-input" placeholder="Search by artwork title or artist name..." oninput="handleSearchFilter()">
+            </div>
+
+            <!-- Division Filters -->
+            <div class="p-gallery-filters">
+              <button class="c-filter-btn is-active" data-filter="All" onclick="handleCategoryFilter(event, 'All')">All Themes</button>
+              <button class="c-filter-btn" data-filter="Portrait" onclick="handleCategoryFilter(event, 'Portrait')">Portrait</button>
+              <button class="c-filter-btn" data-filter="Landscape" onclick="handleCategoryFilter(event, 'Landscape')">Landscape</button>
+              <button class="c-filter-btn" data-filter="Street" onclick="handleCategoryFilter(event, 'Street')">Street</button>
+              <button class="c-filter-btn" data-filter="Wedding" onclick="handleCategoryFilter(event, 'Wedding')">Wedding</button>
+              <button class="c-filter-btn" data-filter="Wild Life" onclick="handleCategoryFilter(event, 'Wild Life')">Wild Life</button>
+              <button class="c-filter-btn" data-filter="Drone Photography" onclick="handleCategoryFilter(event, 'Drone Photography')">Drone</button>
+              <button class="c-filter-btn" data-filter="Mobile Photography" onclick="handleCategoryFilter(event, 'Mobile Photography')">Mobile</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div id="galleryGrid" class="p-gallery-grid">
+              <!-- Dynamic Cards -->
+            </div>
+
+          </div>
+        </div>
+      </main>
+
+      <footer class="l-footer">
+        <div class="l-footer__breadcrumb">
+          <div class="l-footer__breadcrum-body">
+            <ul class="c-breadcrumb-ul u-en-sub">
+              <li class="c-breadcrumb-list"><a class="c-breadcrumb-link" href="../index.html"><span data-scramble>Home</span></a></li>
+              <li class="c-breadcrumb-list"><span>Gallery</span></li>
+            </ul>
+          </div>
+          <div class="l-footer__backtop">
+            <button class="l-footer__backtop-button">
+              <span class="text u-en-sub" data-scramble><span>[Back to Top]</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="l-footer__inner">
+          <div class="l-footer__flex">
+            <div class="l-footer__info">
+              <a href="../contact/index.html" class="l-footer__contact-card" data-scale data-hover-target>
+          <p class="title u-en" data-hover-target-text>Inquiries</p>
+          <p class="text">Feel free to contact us via form or email for sponsorships, stalls, or entry inquiries.</p>
+          <div class="round"></div>
+          <div class="l-footer__contact-card-scale">
+            <div class="l-footer__contact-card-lines">
+              <span class="l-footer__contact-card-line" style="left:0px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:6px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:12px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:18px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:24px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:30px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:36px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:42px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:48px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:54px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:60px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:66px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:72px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:78px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:84px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:90px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:96px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:102px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:108px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:114px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:120px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:126px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:132px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:138px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:144px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:150px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:156px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:162px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:168px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:174px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:180px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:186px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:192px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:198px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:204px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:210px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:216px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:222px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:228px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:234px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:240px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:246px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:252px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:258px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:264px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:270px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:276px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:282px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:288px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:294px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:300px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:306px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:312px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:318px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:324px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:330px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:336px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:342px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:348px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:354px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:360px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:366px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:372px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:378px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:384px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:390px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:396px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:402px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:408px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:414px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:420px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:426px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:432px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:438px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:444px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:450px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:456px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:462px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:468px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:474px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:480px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:486px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:492px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:498px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:504px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:510px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:516px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:522px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:528px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:534px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:540px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:546px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:552px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:558px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:564px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:570px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:576px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:582px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:588px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:594px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:600px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:606px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:612px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:618px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:624px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:630px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:636px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:642px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:648px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:654px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:660px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:666px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:672px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:678px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:684px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:690px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:696px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:702px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:708px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:714px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:720px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:726px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:732px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:738px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:744px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:750px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:756px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:762px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:768px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:774px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:780px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:786px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:792px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:798px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:804px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:810px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:816px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:822px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:828px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:834px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:840px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:846px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:852px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:858px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:864px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:870px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:876px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:882px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:888px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:894px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:900px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:906px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:912px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:918px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:924px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:930px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:936px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:942px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:948px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:954px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:960px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:966px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:972px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:978px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:984px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:990px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:996px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1002px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1008px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1014px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1020px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1026px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1032px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1038px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1044px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1050px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1056px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1062px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1068px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1074px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1080px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1086px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1092px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1098px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1104px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1110px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1116px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1122px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1128px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1134px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1140px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1146px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1152px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1158px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1164px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1170px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1176px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1182px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1188px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1194px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1200px" data-scale-line></span></div>
+          </div>
+          <div class="l-footer__contact-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="black" />
+              <path d="M8 4L12.5 8.5L8 13" stroke="black" />
+            </svg>
+          </div>
+        </a>
+              <div class="l-footer__tel-card">
+          <div class="icon">
+            <img src="../wp-content/themes/captura/assets/images/common/tel.svg" alt="Tel Icon">
+          </div>
+          <div class="contents">
+            <p class="number u-en-sub">+91 422 261 1837</p>
+            <p class="text">Mon - Sat: 9:00 AM - 5:00 PM</p>
+          </div>
+        </div>
+      </div>
+      </div>
+            </div>
+            <div class="l-footer__navigation">
+              <div class="l-footer__navigation-main">
+                <ul class="l-footer__navigation-main-ul">
+            <li class="l-footer__navigation-main-li u-en"><a href="../index.html"><span data-scramble>Home</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../about/index.html"><span data-scramble>About</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../prizes/index.html"><span data-scramble>Prizes</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../schedule/index.html"><span data-scramble>Schedule</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../jury/index.html"><span data-scramble>Jury</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../registration/index.html"><span data-scramble>Login / Register</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../gallery/index.html"><span data-scramble>Gallery</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../contact/index.html"><span data-scramble>Contact</span></a></li>
+          </ul>
+              </div>
+            </div>
+          </div>
+          <div class="l-footer__bottom">
+            <p class="copyright u-en">&copy;CAPTURA</p>
+          </div>
+        </div>
+      </footer>
+
+  <!-- Relocated interactive elements and scripts inside the Barba container -->
+  <!-- INTERACTIVE DETAIL OVERLAY MODAL -->
+  <div id="detailModal" class="c-modal-overlay">
+    <div class="c-modal-container">
+      <button class="c-modal-close" onclick="closeModal()">✕</button>
+      
+      <!-- Photo display side -->
+      <div class="c-modal-photo-side">
+        <img id="mPhoto" class="c-modal-photo" src="" alt="Submission photo">
+      </div>
+      
+      <!-- Information and interactions side -->
+      <div class="c-modal-info-side">
+        <div class="c-modal-info-scroll">
+          <div>
+            <div id="mDivision" class="c-modal-division">Landscape</div>
+            <h2 id="mTitle" class="c-modal-heading">Silent Sunrise</h2>
+          </div>
+          
+          <div id="mDesc" class="c-modal-desc">
+            The description of the artwork will appear here.
+          </div>
+          
+          <!-- Uploader info card -->
+          <div class="c-modal-uploader-box">
+            <div class="c-modal-uploader-title">Artist Profile</div>
+            <div id="mUploaderName" class="c-modal-uploader-name">Artist Name</div>
+            <div id="mUploaderSocialWrap">
+              <a id="mUploaderSocial" class="c-modal-uploader-social" href="" target="_blank">
+                <span style="font-size: 14px;">🔗</span> <span id="mUploaderSocialText">Instagram</span>
+              </a>
+            </div>
+            <div id="mUploaderBio" class="c-modal-uploader-bio">
+              Artist bio and statement will appear here.
+            </div>
+          </div>
+          
+          <!-- Interactive Actions -->
+          <div class="c-modal-actions">
+            <button id="likeBtn" class="c-like-btn" onclick="handleLike()">
+              <span style="font-size: 16px;">♥</span> <span id="likeBtnText">Like</span> (<span id="likeCount">0</span>)
+            </button>
+          </div>
+          
+          <!-- Comments -->
+          <div>
+            <h3 class="c-comments-title u-en">Comments (<span id="commentsCount">0</span>)</h3>
+            <div id="commentsList" class="c-comments-list">
+              <!-- Comments dynamically rendered -->
+            </div>
+            
+            <form id="commentForm" class="c-comment-form" onsubmit="submitComment(event)">
+              <input type="text" id="cAuthor" class="c-comment-input" placeholder="Your Name" required>
+              <textarea id="cText" class="c-comment-input" rows="2" placeholder="Write a comment..." required></textarea>
+              <button type="submit" class="c-btn" style="padding: 10rem 16rem; font-size:12rem; width: auto; align-self: flex-end;">Post Comment</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Controller Logic -->
+  <script>
+    // State Variables
+    let submissions = [];
+    let currentFilter = 'All';
+    let currentSearch = '';
+    let activeSubId = null;
+
+    // Seed Data
+    const seedSubmissions = [
+      {
+        id: "seed_1",
+        userId: "seed_chloe@email.com",
+        userName: "Chloe Dubois",
+        userSocial: "https://instagram.com/chloe_dubois",
+        userBio: "Landscape photographer capturing fog, clouds, and golden peaks.",
+        title: "Silent Morning",
+        division: "Landscape",
+        description: "Captured at dawn in the Himalayas. The morning light hitting the morning fog creates a serene landscape.",
+        image: "../wp-content/themes/captura/assets/images/home/scene01.jpg",
+        likes: 28,
+        likedBy: [],
+        comments: [
+          { name: "Andreas Schmidt", text: "Stunning light control and composition! Perfect showcase of depth.", date: new Date(Date.now() - 3600000 * 24 * 3).toISOString() },
+          { name: "Rohan", text: "Absolutely breathtaking! The fog makes it look magical.", date: new Date(Date.now() - 3600000 * 12).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 24 * 5).toISOString()
+      },
+      {
+        id: "seed_2",
+        userId: "seed_satoshi@email.com",
+        userName: "Satoshi Tanaka",
+        userSocial: "https://x.com/satoshi_photo",
+        userBio: "Wedding & documentary photographer detailing genuine human interactions.",
+        title: "Golden Hour Glow",
+        division: "Portrait",
+        description: "Backlit portrait highlighting the details of the lace veil in the warm setting sun.",
+        image: "../wp-content/themes/captura/assets/images/wedding/photo-image06.webp",
+        likes: 74,
+        likedBy: [],
+        comments: [
+          { name: "Kenji Suzuki", text: "Superb backlight! The details are captured beautifully.", date: new Date(Date.now() - 3600000 * 24 * 2).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 24 * 4).toISOString()
+      },
+      {
+        id: "seed_3",
+        userId: "seed_arjun@email.com",
+        userName: "Arjun Sen",
+        userSocial: "https://instagram.com/arjun_clicks",
+        userBio: "Street and documentary photographer capturing urban stories.",
+        title: "Steps of History",
+        division: "Street",
+        description: "An elderly craftsman working on his traditional wooden crafts in Varanasi, representing decades of dedication.",
+        image: "../wp-content/themes/captura/assets/images/home/scene05.jpg",
+        likes: 19,
+        likedBy: [],
+        comments: [
+          { name: "Aria", text: "The hands tell such a deep story. Wonderful capture.", date: new Date(Date.now() - 3600000 * 2).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 24 * 2).toISOString()
+      },
+      {
+        id: "seed_4",
+        userId: "seed_priya@email.com",
+        userName: "Priya Sharma",
+        userSocial: "https://instagram.com/priya_weddings",
+        userBio: "Candid wedding photographer focused on cultural celebrations.",
+        title: "Eternal Bond",
+        division: "Wedding",
+        description: "A candid moment between a bride and groom during their traditional vows, showing genuine laughter.",
+        image: "../wp-content/themes/captura/assets/images/wedding/photo-image01.webp",
+        likes: 42,
+        likedBy: [],
+        comments: [
+          { name: "Aditya", text: "A beautiful moment frozen in time. Truly special!", date: new Date(Date.now() - 3600000 * 24 * 1).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 24 * 3).toISOString()
+      },
+      {
+        id: "seed_5",
+        userId: "seed_karan@email.com",
+        userName: "Karan Johar",
+        userSocial: "https://x.com/karan_wildlife",
+        userBio: "Wildlife conservationist and photographer chasing the wild cats.",
+        title: "Misty Kingdom",
+        division: "Wild Life",
+        description: "An elusive tiger wading through the early morning fog in Kabini forest reserve.",
+        image: "../wp-content/themes/captura/assets/images/home/wildlife.png",
+        likes: 95,
+        likedBy: [],
+        comments: [
+          { name: "Sarah Connor", text: "Incredible shot! The atmosphere is electric.", date: new Date(Date.now() - 3600000 * 4).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 24 * 1).toISOString()
+      },
+      {
+        id: "seed_6",
+        userId: "seed_vikram@email.com",
+        userName: "Vikram Rathore",
+        userSocial: "https://instagram.com/vikram_drone",
+        userBio: "Aerial photographer mapping the geometries of Indian landscapes.",
+        title: "Emerald Geometry",
+        division: "Drone Photography",
+        description: "Symmetrical tea estates of Munnar from a bird's eye view, presenting beautiful patterns.",
+        image: "../wp-content/themes/captura/assets/images/home/drone.png",
+        likes: 83,
+        likedBy: [],
+        comments: [
+          { name: "Deepak", text: "The alignment and colors are top-tier. Exceptional work!", date: new Date(Date.now() - 3600000 * 8).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 18).toISOString()
+      },
+      {
+        id: "seed_7",
+        userId: "seed_neha@email.com",
+        userName: "Neha Gupta",
+        userSocial: "https://instagram.com/neha_mobile_lens",
+        userBio: "Capturing everyday magic using mobile cameras and reflections.",
+        title: "Reflections in Rain",
+        division: "Mobile Photography",
+        description: "A simple puddle reflection in Mumbai during the monsoon, shot entirely on a mobile phone.",
+        image: "../wp-content/themes/captura/assets/images/home/scene03.jpg",
+        likes: 35,
+        likedBy: [],
+        comments: [
+          { name: "Emily Laurent", text: "Great reflection work! Proves the best camera is the one you have with you.", date: new Date(Date.now() - 3600000 * 20).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 24 * 3).toISOString()
+      },
+      {
+        id: "seed_8",
+        userId: "seed_elena@email.com",
+        userName: "Elena Rostova",
+        userSocial: "https://instagram.com/elena_wave",
+        userBio: "Fine art seascape photographer chasing dramatic shorelines.",
+        title: "Symphony of Waves",
+        division: "Landscape",
+        description: "Long exposure of the rugged coastlines of India under dramatic monsoon skies.",
+        image: "../wp-content/themes/captura/assets/images/home/scene07.jpg",
+        likes: 56,
+        likedBy: [],
+        comments: [
+          { name: "Pierre", text: "Magnificent long exposure! The water looks like silk.", date: new Date(Date.now() - 3600000 * 5).toISOString() }
+        ],
+        date: new Date(Date.now() - 3600000 * 24 * 1).toISOString()
+      }
+    ];
+
+    // Load submissions from localStorage, or initialize with seed data
+    function loadSubmissions() {
+      if (window.CapturaDB) {
+        submissions = window.CapturaDB.getSubmissions();
+      } else {
+        const stored = localStorage.getItem('npa_submissions');
+        submissions = stored ? JSON.parse(stored) : seedSubmissions;
+      }
+    }
+
+    function saveSubmissions() {
+      if (window.CapturaDB) {
+        window.CapturaDB.saveSubmissions(submissions);
+      } else {
+        localStorage.setItem('npa_submissions', JSON.stringify(submissions));
+      }
+    }
+
+    // Filter Category Handler
+    function handleCategoryFilter(event, category) {
+      // Toggle active filter button style
+      document.querySelectorAll('.c-filter-btn').forEach(btn => {
+        btn.classList.remove('is-active');
+      });
+      event.currentTarget.classList.add('is-active');
+
+      currentFilter = category;
+      renderGallery();
+    }
+
+    // Filter Search Handler
+    function handleSearchFilter() {
+      currentSearch = document.getElementById('gallerySearch').value.trim().toLowerCase();
+      renderGallery();
+    }
+
+    // Render Gallery items
+    function renderGallery() {
+      const grid = document.getElementById('galleryGrid');
+      grid.innerHTML = '';
+
+      // Filter submissions
+      let filtered = submissions;
+      
+      if (currentFilter !== 'All') {
+        filtered = filtered.filter(sub => sub.division.toLowerCase() === currentFilter.toLowerCase());
+      }
+
+      if (currentSearch) {
+        filtered = filtered.filter(sub => 
+          sub.title.toLowerCase().includes(currentSearch) || 
+          sub.userName.toLowerCase().includes(currentSearch)
+        );
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="p-empty-gallery">No entries found. Try a different search term or category.</div>';
+        return;
+      }
+
+      filtered.forEach(sub => {
+        const card = document.createElement('div');
+        card.className = 'c-gallery-card';
+        card.onclick = () => openModal(sub.id);
+        
+        card.innerHTML = `
+          <div class="c-gallery-card__img-wrap">
+            <img class="c-gallery-card__img" src="${sub.image}" alt="${escapeHtml(sub.title)}">
+          </div>
+          <div class="c-gallery-card__body">
+            <span class="c-gallery-card__division">${sub.division}</span>
+            <h3 class="c-gallery-card__title">${escapeHtml(sub.title)}</h3>
+            <p class="c-gallery-card__uploader">by ${escapeHtml(sub.userName)}</p>
+            <div class="c-gallery-card__footer">
+              <div>♥ <span class="card-likes-count">${sub.likes}</span></div>
+              <div>💬 <span class="card-comments-count">${sub.comments.length}</span> comments</div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Escape HTML strings
+    function escapeHtml(str) {
+      return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    // Modal Control Logic
+    function openModal(id) {
+      activeSubId = id;
+      const sub = submissions.find(s => s.id === id);
+      if (!sub) return;
+
+      document.getElementById('mPhoto').src = sub.image;
+      document.getElementById('mTitle').innerText = sub.title;
+      document.getElementById('mDivision').innerText = sub.division;
+      document.getElementById('mDesc').innerText = sub.description;
+      document.getElementById('mUploaderName').innerText = sub.userName;
+      
+      const socialLink = document.getElementById('mUploaderSocial');
+      const socialText = document.getElementById('mUploaderSocialText');
+      if (sub.userSocial) {
+        socialLink.href = sub.userSocial;
+        socialText.innerText = sub.userSocial.replace(/^https?:\/\/(www\.)?/, '');
+        document.getElementById('mUploaderSocialWrap').style.display = 'block';
+      } else {
+        document.getElementById('mUploaderSocialWrap').style.display = 'none';
+      }
+
+      document.getElementById('mUploaderBio').innerText = sub.userBio || 'No biography provided.';
+      document.getElementById('likeCount').innerText = sub.likes;
+      document.getElementById('commentsCount').innerText = sub.comments.length;
+
+      // Handle like button state based on local storage
+      const likedEntries = JSON.parse(localStorage.getItem('npa_liked_entries') || '[]');
+      const likeBtn = document.getElementById('likeBtn');
+      if (likedEntries.includes(id)) {
+        likeBtn.classList.add('has-liked');
+        document.getElementById('likeBtnText').innerText = 'Liked';
+      } else {
+        likeBtn.classList.remove('has-liked');
+        document.getElementById('likeBtnText').innerText = 'Like';
+      }
+
+      renderComments(sub.comments);
+
+      document.getElementById('detailModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Lock background scroll
+    }
+
+    function closeModal() {
+      document.getElementById('detailModal').style.display = 'none';
+      document.body.style.overflow = 'auto'; // Restore background scroll
+      activeSubId = null;
+      renderGallery(); // Update card stats in main grid
+    }
+
+    // Like Action Handler
+    function handleLike() {
+      if (!activeSubId) return;
+      const sub = submissions.find(s => s.id === activeSubId);
+      if (!sub) return;
+
+      let likedEntries = JSON.parse(localStorage.getItem('npa_liked_entries') || '[]');
+      const likeBtn = document.getElementById('likeBtn');
+
+      if (likedEntries.includes(activeSubId)) {
+        // Unlike
+        likedEntries = likedEntries.filter(id => id !== activeSubId);
+        sub.likes--;
+        likeBtn.classList.remove('has-liked');
+        document.getElementById('likeBtnText').innerText = 'Like';
+      } else {
+        // Like
+        likedEntries.push(activeSubId);
+        sub.likes++;
+        likeBtn.classList.add('has-liked');
+        document.getElementById('likeBtnText').innerText = 'Liked';
+      }
+
+      localStorage.setItem('npa_liked_entries', JSON.stringify(likedEntries));
+      document.getElementById('likeCount').innerText = sub.likes;
+      
+      saveSubmissions();
+    }
+
+    // Comments Rendering
+    function renderComments(comments) {
+      const container = document.getElementById('commentsList');
+      container.innerHTML = '';
+
+      if (comments.length === 0) {
+        container.innerHTML = '<div class="c-comment-empty">No comments yet. Be the first to comment!</div>';
+        return;
+      }
+
+      comments.forEach(c => {
+        const dateStr = new Date(c.date).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        const item = document.createElement('div');
+        item.className = 'c-comment-item';
+        item.innerHTML = `
+          <div class="c-comment-meta">
+            <span class="c-comment-author">${escapeHtml(c.name)}</span>
+            <span>${dateStr}</span>
+          </div>
+          <div class="c-comment-text">${escapeHtml(c.text)}</div>
+        `;
+        container.appendChild(item);
+      });
+      // Scroll to bottom of comments list
+      container.scrollTop = container.scrollHeight;
+    }
+
+    // Post Comment Handler
+    function submitComment(event) {
+      event.preventDefault();
+      if (!activeSubId) return;
+
+      const sub = submissions.find(s => s.id === activeSubId);
+      if (!sub) return;
+
+      const name = document.getElementById('cAuthor').value.trim();
+      const text = document.getElementById('cText').value.trim();
+
+      const newComment = {
+        name: name,
+        text: text,
+        date: new Date().toISOString()
+      };
+
+      sub.comments.push(newComment);
+      saveSubmissions();
+
+      document.getElementById('commentsCount').innerText = sub.comments.length;
+      renderComments(sub.comments);
+
+      // Reset textarea, keep name
+      document.getElementById('cText').value = '';
+    }
+
+    // Close modal on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Close modal on backdrop click
+    document.getElementById('detailModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('detailModal')) {
+        closeModal();
+      }
+    });
+
+    function checkUrlParams() {
+      const params = new URLSearchParams(window.location.search);
+      const divParam = params.get('division');
+      if (divParam) {
+        currentFilter = divParam;
+        document.querySelectorAll('.c-filter-btn').forEach(btn => {
+          if (btn.getAttribute('data-filter').toLowerCase() === divParam.toLowerCase()) {
+            btn.classList.add('is-active');
+          } else {
+            btn.classList.remove('is-active');
+          }
+        });
+      }
+    }
+
+    // Initialize Page immediately on Barba load / direct load
+    loadSubmissions();
+    checkUrlParams();
+    renderGallery();
+
+    window.addEventListener('captura-db-synced', () => {
+      loadSubmissions();
+      renderGallery();
+    });
+    
+    // Auto-populate author name from current user session if logged in
+    const currentUser = JSON.parse(localStorage.getItem('npa_current_user') || 'null');
+    if (currentUser && document.getElementById('cAuthor')) {
+      document.getElementById('cAuthor').value = currentUser.name;
+    }
+  </script>
+    </div>
+  </div>
+
+  <script src="../wp-content/themes/captura/assets/js/db.js?ver=8"></script>
+  <script type="module" src="../wp-content/themes/captura/assets/js/bundle/app.bundle31fb.js?ver=35"></script>
+  <script type="text/javascript" src="../cdn.jsdelivr.net/npm/%40barba/core%402.9.6/dist/barba.umd.min7d47.js?ver=2.9.6" id="barba-js"></script>
+  <script type="text/javascript" src="../cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min0567.js?ver=3.12.4" id="scrollTrigger-js"></script>
+
+  
+</body>
+</html>

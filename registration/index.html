@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="../wp-content/themes/captura/assets/images/favicons/favicon-32x32.png" sizes="32x32" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com/" />
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&amp;family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap" />
+  <link rel="stylesheet" href="../use.typekit.net/lig7ycz.css">
+  <link rel="stylesheet" href="../wp-content/themes/captura/assets/css/app31fb.css?ver=41" type="text/css" media="all" />
+  <title>Registration | CAPTURA</title>
+  <meta name="description" content="Contest submission and registration portal for CAPTURA. Sign up or log in to upload your photography entries.">
+  <style>
+    /* Adaptive Variable Colors */
+    :root, .p-contact {
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --card-text: #ffffff;
+      --card-text-muted: rgba(255, 255, 255, 0.6);
+      --card-text-light: rgba(255, 255, 255, 0.85);
+      --input-bg: rgba(255, 255, 255, 0.03);
+      --input-border: rgba(255, 255, 255, 0.1);
+      --input-text: #ffffff;
+      --btn-bg: rgba(255, 255, 255, 0.05);
+      --btn-border: rgba(255, 255, 255, 0.2);
+      --btn-text: #ffffff;
+      --btn-hover-bg: #ffffff;
+      --btn-hover-text: #000000;
+      --table-th-bg: rgba(255, 255, 255, 0.04);
+      --table-border: rgba(255, 255, 255, 0.06);
+      --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+      --stat-gradient: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.7) 100%);
+    }
+
+    /* Automatically adapt to light background when container has data-background-white */
+    .p-contact[data-background-white] {
+      --card-bg: rgba(0, 0, 0, 0.02);
+      --card-border: rgba(0, 0, 0, 0.08);
+      --card-text: #000000;
+      --card-text-muted: rgba(0, 0, 0, 0.6);
+      --card-text-light: rgba(0, 0, 0, 0.85);
+      --input-bg: rgba(0, 0, 0, 0.03);
+      --input-border: rgba(0, 0, 0, 0.1);
+      --input-text: #000000;
+      --btn-bg: rgba(0, 0, 0, 0.05);
+      --btn-border: rgba(0, 0, 0, 0.2);
+      --btn-text: #000000;
+      --btn-hover-bg: #000000;
+      --btn-hover-text: #ffffff;
+      --table-th-bg: rgba(0, 0, 0, 0.04);
+      --table-border: rgba(0, 0, 0, 0.06);
+      --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+      --stat-gradient: linear-gradient(135deg, #000 0%, rgba(0,0,0,0.7) 100%);
+    }
+
+    /* Alert styles */
+    .c-alert {
+      padding: 14px 18px;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      display: none;
+      backdrop-filter: blur(8px);
+    }
+    .c-alert.alert-success {
+      background: rgba(46, 204, 113, 0.15);
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      color: #2ecc71;
+    }
+    .c-alert.alert-danger {
+      background: rgba(235, 87, 87, 0.15);
+      border: 1px solid rgba(235, 87, 87, 0.3);
+      color: #eb5757;
+    }
+
+    /* Components styling using variables */
+    .p-contact-main {
+      background: var(--card-bg) !important;
+      backdrop-filter: blur(20px) saturate(120%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(120%) !important;
+      border: 1px solid var(--card-border) !important;
+      color: var(--card-text) !important;
+      box-shadow: var(--card-shadow) !important;
+      border-radius: 8px !important;
+    }
+    .p-contact-main__input, .p-contact-main__textarea, select.p-contact-main__input {
+      background: var(--input-bg) !important;
+      border: 1px solid var(--input-border) !important;
+      color: var(--input-text) !important;
+      border-radius: 4px !important;
+      padding: 12px 16px !important;
+      transition: all 0.3s ease !important;
+      outline: none !important;
+    }
+    .p-contact-main__input:focus, .p-contact-main__textarea:focus {
+      border-color: var(--card-text-muted) !important;
+      background: var(--card-bg) !important;
+    }
+    .p-contact-main__label {
+      color: var(--card-text-light) !important;
+      font-size: 11px !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.1em !important;
+    }
+    .p-contact-main__link {
+      color: var(--btn-text) !important;
+      border: 1px solid var(--btn-border) !important;
+      padding: 12px 24px !important;
+      border-radius: 4px !important;
+      background: var(--btn-bg) !important;
+      transition: all 0.3s ease !important;
+    }
+    .p-contact-main__link:hover {
+      background: var(--btn-hover-bg) !important;
+      color: var(--btn-hover-text) !important;
+      border-color: var(--btn-hover-bg) !important;
+    }
+
+    /* Force text & headers in main cards to adapt automatically */
+    .p-contact-main h1, .p-contact-main h2, .p-contact-main h3 {
+      color: var(--card-text) !important;
+      transition: color 0.3s ease;
+    }
+    .p-contact-main p, .p-contact-main .text-muted {
+      color: var(--card-text-muted) !important;
+      transition: color 0.3s ease;
+    }
+
+    /* User Submissions specific styles */
+    .p-sub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16rem;
+    }
+    .p-sub-empty {
+      color: var(--card-text-muted) !important;
+      font-size: 13rem;
+      text-align: center;
+      padding: 40rem 0;
+      border: 1px dashed var(--card-border) !important;
+      border-radius: 4px;
+    }
+    .p-sub-item {
+      display: flex;
+      gap: 16rem;
+      background: var(--card-bg) !important;
+      border: 1px solid var(--card-border) !important;
+      padding: 15px;
+      border-radius: 6px;
+      transition: background 0.3s, border-color 0.3s;
+      color: var(--card-text) !important;
+    }
+    .p-sub-item:hover {
+      background: var(--btn-bg) !important;
+      border-color: var(--btn-border) !important;
+    }
+    .p-sub-img-wrap {
+      width: 120rem;
+      height: 90rem;
+      overflow: hidden;
+      border-radius: 4px;
+      background: var(--btn-bg) !important;
+      flex-shrink: 0;
+    }
+    .p-sub-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .p-sub-content {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .p-sub-title {
+      font-size: 15rem;
+      font-weight: 700;
+      color: var(--card-text) !important;
+      margin-bottom: 4rem;
+    }
+    .p-sub-division {
+      font-size: 11rem;
+      color: var(--card-text-light) !important;
+      border: 1px solid var(--btn-border) !important;
+      padding: 2rem 8rem;
+      display: inline-block;
+      border-radius: 10px;
+      margin-bottom: 6rem;
+      width: fit-content;
+    }
+    .p-sub-stats {
+      font-size: 12rem;
+      color: var(--card-text-muted) !important;
+      display: flex;
+      gap: 15rem;
+      margin-top: 4rem;
+    }
+    .p-sub-stat-item {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+    }
+  </style>
+</head>
+
+<body class="page-template page-template-page-whats-ykp">
+  <div class="l-wrapper" data-barba="wrapper" aria-live="polite">
+    <div id="WebGL" class="c-background"></div>
+    
+    <div class="__container" data-barba="container" data-barba-namespace="whats">
+      <header class="l-header">
+        <div class="l-header__inner">
+          <a href="../index.html" class="l-header__logo" style="text-decoration:none; text-decoration:none;">
+      <img src="../wp-content/themes/captura/assets/images/common/captura-logo.png" alt="CAPTURA">
+    </a>
+          <nav class="l-header__nav">
+            <ul class="l-header__ul">
+        <li class="l-header__list u-en" data-hover-target data-page-name="home"><a href="../index.html" data-hover-target-text>Home</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="about"><a href="../about/index.html" data-hover-target-text>About</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="prizes"><a href="../prizes/index.html" data-hover-target-text>Prizes</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="schedule"><a href="../schedule/index.html" data-hover-target-text>Schedule</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="jury"><a href="../jury/index.html" data-hover-target-text>Jury</a></li>
+        <li class="l-header__list u-en is-current" data-hover-target data-page-name="registration"><a href="../registration/index.html" data-hover-target-text>Login / Register</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="gallery"><a href="../gallery/index.html" data-hover-target-text>Gallery</a></li>
+        <li class="l-header__list u-en" data-hover-target data-page-name="contact"><a href="../contact/index.html" data-hover-target-text>Contact</a></li>
+      </ul>
+            <div class="l-header__scales">
+              <div class="l-header__scale-side left"></div>
+              <div class="l-header__scale-side right"></div>
+              <span class="l-header__scales-line" style="left:6px"></span><span class="l-header__scales-line" style="left:12px"></span><span class="l-header__scales-line" style="left:18px"></span><span class="l-header__scales-line" style="left:24px"></span><span class="l-header__scales-line" style="left:30px"></span><span class="l-header__scales-line" style="left:36px"></span><span class="l-header__scales-line" style="left:42px"></span><span class="l-header__scales-line" style="left:48px"></span><span class="l-header__scales-line" style="left:54px"></span><span class="l-header__scales-line" style="left:60px"></span><span class="l-header__scales-line" style="left:66px"></span><span class="l-header__scales-line" style="left:72px"></span><span class="l-header__scales-line" style="left:78px"></span><span class="l-header__scales-line" style="left:84px"></span><span class="l-header__scales-line" style="left:90px"></span><span class="l-header__scales-line" style="left:96px"></span><span class="l-header__scales-line" style="left:102px"></span><span class="l-header__scales-line" style="left:108px"></span><span class="l-header__scales-line" style="left:114px"></span><span class="l-header__scales-line" style="left:120px"></span><span class="l-header__scales-line" style="left:126px"></span><span class="l-header__scales-line" style="left:132px"></span><span class="l-header__scales-line" style="left:138px"></span><span class="l-header__scales-line" style="left:144px"></span><span class="l-header__scales-line" style="left:150px"></span><span class="l-header__scales-line" style="left:156px"></span><span class="l-header__scales-line" style="left:162px"></span><span class="l-header__scales-line" style="left:168px"></span><span class="l-header__scales-line" style="left:174px"></span><span class="l-header__scales-line" style="left:180px"></span><span class="l-header__scales-line" style="left:186px"></span><span class="l-header__scales-line" style="left:192px"></span><span class="l-header__scales-line" style="left:198px"></span><span class="l-header__scales-line" style="left:204px"></span><span class="l-header__scales-line" style="left:210px"></span><span class="l-header__scales-line" style="left:216px"></span><span class="l-header__scales-line" style="left:222px"></span><span class="l-header__scales-line" style="left:228px"></span><span class="l-header__scales-line" style="left:234px"></span><span class="l-header__scales-line" style="left:240px"></span><span class="l-header__scales-line" style="left:246px"></span><span class="l-header__scales-line" style="left:252px"></span><span class="l-header__scales-line" style="left:258px"></span><span class="l-header__scales-line" style="left:264px"></span><span class="l-header__scales-line" style="left:270px"></span><span class="l-header__scales-line" style="left:276px"></span><span class="l-header__scales-line" style="left:282px"></span><span class="l-header__scales-line" style="left:288px"></span><span class="l-header__scales-line" style="left:294px"></span><span class="l-header__scales-line" style="left:300px"></span><span class="l-header__scales-line" style="left:306px"></span><span class="l-header__scales-line" style="left:312px"></span><span class="l-header__scales-line" style="left:318px"></span><span class="l-header__scales-line" style="left:324px"></span><span class="l-header__scales-line" style="left:330px"></span><span class="l-header__scales-line" style="left:336px"></span><span class="l-header__scales-line" style="left:342px"></span><span class="l-header__scales-line" style="left:348px"></span><span class="l-header__scales-line" style="left:354px"></span><span class="l-header__scales-line" style="left:360px"></span><span class="l-header__scales-line" style="left:366px"></span><span class="l-header__scales-line" style="left:372px"></span><span class="l-header__scales-line" style="left:378px"></span><span class="l-header__scales-line" style="left:384px"></span><span class="l-header__scales-line" style="left:390px"></span><span class="l-header__scales-line" style="left:396px"></span><span class="l-header__scales-line" style="left:402px"></span><span class="l-header__scales-line" style="left:408px"></span><span class="l-header__scales-line" style="left:414px"></span><span class="l-header__scales-line" style="left:420px"></span><span class="l-header__scales-line" style="left:426px"></span><span class="l-header__scales-line" style="left:432px"></span><span class="l-header__scales-line" style="left:438px"></span><span class="l-header__scales-line" style="left:444px"></span><span class="l-header__scales-line" style="left:450px"></span><span class="l-header__scales-line" style="left:456px"></span><span class="l-header__scales-line" style="left:462px"></span><span class="l-header__scales-line" style="left:468px"></span><span class="l-header__scales-line" style="left:474px"></span><span class="l-header__scales-line" style="left:480px"></span><span class="l-header__scales-line" style="left:486px"></span><span class="l-header__scales-line" style="left:492px"></span><span class="l-header__scales-line" style="left:498px"></span><span class="l-header__scales-line" style="left:504px"></span><span class="l-header__scales-line" style="left:510px"></span><span class="l-header__scales-line" style="left:516px"></span><span class="l-header__scales-line" style="left:522px"></span><span class="l-header__scales-line" style="left:528px"></span><span class="l-header__scales-line" style="left:534px"></span><span class="l-header__scales-line" style="left:540px"></span><span class="l-header__scales-line" style="left:546px"></span><span class="l-header__scales-line" style="left:552px"></span><span class="l-header__scales-line" style="left:558px"></span><span class="l-header__scales-line" style="left:564px"></span><span class="l-header__scales-line" style="left:570px"></span><span class="l-header__scales-line" style="left:576px"></span><span class="l-header__scales-line" style="left:582px"></span><span class="l-header__scales-line" style="left:588px"></span><span class="l-header__scales-line" style="left:594px"></span><span class="l-header__scales-line" style="left:600px"></span><span class="l-header__scales-line" style="left:606px"></span><span class="l-header__scales-line" style="left:612px"></span><span class="l-header__scales-line" style="left:618px"></span>
+            </div>
+          </nav>
+          <div class="l-header__scale-area"></div>
+        </div>
+      </header>
+      
+      <button class="l-menu-button">
+        <span class="l-menu-button__text u-en-sub">Menu</span>
+        <span class="l-menu-button__line">
+          <span></span><span></span><span></span><span></span>
+        </span>
+      </button>
+      
+      <div class="l-menu-body">
+        <div class="l-menu-body__inner">
+          <ul class="l-menu-body__ul">
+      <li class="l-menu-body__list">
+        <a href="../index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Home</p>
+          <p class="l-menu-body__link-ja">Welcome</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../about/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">About</p>
+          <p class="l-menu-body__link-ja">The Event</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../prizes/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Prizes</p>
+          <p class="l-menu-body__link-ja">Themes & Awards</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../schedule/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Schedule</p>
+          <p class="l-menu-body__link-ja">Agenda & Workshops</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../jury/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Jury</p>
+          <p class="l-menu-body__link-ja">Jury Panel</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../registration/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Login / Register</p>
+          <p class="l-menu-body__link-ja">Log In / Sign Up</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../gallery/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Gallery</p>
+          <p class="l-menu-body__link-ja">Public Gallery</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+      <li class="l-menu-body__list">
+        <a href="../contact/index.html" class="l-menu-body__link">
+          <p class="l-menu-body__link-en u-en">Contact</p>
+          <p class="l-menu-body__link-ja">Get In Touch</p>
+          <div class="l-menu-body__link-arrow">
+            <svg width="13" height="14" viewBox="0 0 13 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="white" />
+              <path d="M7 4L11.5 8.5L7 13" stroke="white" />
+            </svg>
+          </div>
+        </a>
+      </li>
+    </ul>
+        </div>
+      </div>
+
+            <main class="l-main">
+        <div class="p-contact" data-background-white>
+          <div class="c-secondary-contents">
+            <div class="p-contact__box--stickey">
+              <section class="c-secondary-hero">
+                <div class="c-secondary-hero__cover">
+                  <h1 class="c-secondary-hero__title u-en">
+                    <span class="c-secondary-hero__round"></span>
+                    <span class="c-secondary-hero__title-text">Contestant Portal</span>
+                  </h1>
+                  <h2 class="c-secondary-hero__sub">Submit Work</h2>
+                </div>
+              </section>
+              
+              <div id="alertBox" class="c-alert" style="display: none; margin: 20px 0; padding: 15px; border-radius: 4px; font-size: 13px;"></div>
+              
+              <!-- Tab Navigation or Info Box -->
+              <div id="regStatusBox" class="c-contact-status" style="margin-top: 20px;">
+                <div id="authTabs" style="display: flex; gap: 15px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 10px;">
+                  <button id="tabSignupBtn" class="c-filter-btn is-active" style="border: none; background: none; font-size: 14px; font-weight: 700; cursor: pointer; color: var(--card-text); padding: 5px 10px;">Create Account</button>
+                  <button id="tabLoginBtn" class="c-filter-btn" style="border: none; background: none; font-size: 14px; font-weight: 700; cursor: pointer; color: #888; padding: 5px 10px;">Log In</button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-contact-main">
+              <!-- VIEW 1: AUTHENTICATION (SIGN UP & LOG IN) -->
+              <div id="authView" class="p-contact-main__form">
+                <!-- Sign Up Form -->
+                <div id="signupFormCard">
+                  <div style="margin-bottom: 30rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 15rem;">
+                    <h2 style="font-size:22px; color:var(--card-text); font-weight:700;" class="u-en">CREATE CONTESTANT ACCOUNT</h2>
+                    <p style="font-size:12px; color: var(--card-text-muted); margin-top:2px;">Register as a participant to book slots and submit photos</p>
+                  </div>
+                  
+                  <form id="signupForm" onsubmit="handleSignup(event)">
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="suName">Full Name / Artist Name</label>
+                      <input type="text" id="suName" class="p-contact-main__input" required placeholder="e.g. Rahul Sharma">
+                    </div>
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="suEmail">Email Address</label>
+                      <input type="email" id="suEmail" class="p-contact-main__input" required placeholder="example@email.com">
+                    </div>
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="suPassword">Password</label>
+                      <input type="password" id="suPassword" class="p-contact-main__input" required placeholder="Enter a secure password">
+                    </div>
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label" for="suSocial">Social Media Link (Instagram / X)</label>
+                      <input type="url" id="suSocial" class="p-contact-main__input" placeholder="https://instagram.com/yourusername">
+                    </div>
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label" for="suBio">Artist Statement / Biography</label>
+                      <textarea id="suBio" class="p-contact-main__textarea" placeholder="Tell us about yourself and the philosophy behind your photography..."></textarea>
+                    </div>
+                    <button type="submit" class="p-contact-main__link" style="border: none; background: none; text-align: left; margin-top: 15px; cursor: pointer;">
+                      <span>Register Account</span>
+                      <img src="../wp-content/themes/captura/assets/images/icons/curve-arrow.svg" alt="" class="p-contact-main__icon--arrow">
+                    </button>
+                    
+                    <div style="text-align: center; margin: 25px 0 15px; font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                      <span style="height: 1px; width: 40px; background: rgba(0,0,0,0.1);"></span>
+                      <span>Or continue with</span>
+                      <span style="height: 1px; width: 40px; background: rgba(0,0,0,0.1);"></span>
+                    </div>
+                    
+                    <button type="button" onclick="handleGoogleSignIn()" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border: 1px solid var(--btn-border); background: var(--btn-bg); padding: 12px; border-radius: 4px; font-size: 13px; font-weight: 700; color: var(--btn-text); cursor: pointer; transition: background 0.3s ease;">
+                      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; height: 18px;">
+                      <span>Sign In with Google</span>
+                    </button>
+                  </form>
+                </div>
+                
+                <!-- Log In Form -->
+                <div id="loginFormCard" style="display: none;">
+                  <div style="margin-bottom: 30rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 15rem;">
+                    <h2 style="font-size:22px; color:var(--card-text); font-weight:700;" class="u-en">PARTICIPANT LOG IN</h2>
+                    <p style="font-size:12px; color: var(--card-text-muted); margin-top:2px;">Log in to upload and manage entries</p>
+                  </div>
+                  
+                  <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="liEmail">Email Address</label>
+                      <input type="email" id="liEmail" class="p-contact-main__input" required placeholder="example@email.com">
+                    </div>
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="liPassword">Password</label>
+                      <input type="password" id="liPassword" class="p-contact-main__input" required placeholder="Enter your password">
+                    </div>
+                    <button type="submit" class="p-contact-main__link" style="border: none; background: none; text-align: left; margin-top: 15px; cursor: pointer;">
+                      <span>Log In</span>
+                      <img src="../wp-content/themes/captura/assets/images/icons/curve-arrow.svg" alt="" class="p-contact-main__icon--arrow">
+                    </button>
+                    
+                    <div style="text-align: center; margin: 25px 0 15px; font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.1em; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                      <span style="height: 1px; width: 40px; background: rgba(0,0,0,0.1);"></span>
+                      <span>Or continue with</span>
+                      <span style="height: 1px; width: 40px; background: rgba(0,0,0,0.1);"></span>
+                    </div>
+                    
+                    <button type="button" onclick="handleGoogleSignIn()" style="display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; border: 1px solid var(--btn-border); background: var(--btn-bg); padding: 12px; border-radius: 4px; font-size: 13px; font-weight: 700; color: var(--btn-text); cursor: pointer; transition: background 0.3s ease;">
+                      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" style="width: 18px; height: 18px;">
+                      <span>Sign In with Google</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              
+              <!-- VIEW 2: LOGGED IN USER DASHBOARD -->
+              <div id="dashboardView" style="display: none;">
+                <!-- Profile Summary & Slots Card -->
+                <div style="background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--card-border);; border-radius: 4px; padding: 25px; margin-bottom: 35rem; border: 1px solid var(--card-border);">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 15px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 15px;">
+                    <div>
+                      <h2 style="font-size: 24px; font-weight: 700; color: var(--card-text);" id="profName">-</h2>
+                      <p style="font-size: 13px; color: var(--card-text-muted); margin-top: 2px;" id="profEmail">-</p>
+                      <p style="font-size: 13px; color: var(--card-text-muted); margin-top: 2px;" id="profSocial">-</p>
+                      <p style="font-size: 13px; color: var(--card-text-muted); margin-top: 8px; font-style: italic;" id="profBio">-</p>
+                    </div>
+                    <button onclick="handleLogout()" class="c-filter-btn" style="padding: 6px 12px; font-size: 12px; border: 1px solid #fff; color: #fff;; cursor: pointer; background: transparent; color: var(--card-text); border-radius: 3px;">Log Out</button>
+                  </div>
+                  
+                  <!-- Slots Status Panel -->
+                  <div style="margin-top: 20px;">
+                    <h3 style="font-size: 16px; font-weight: 700; color: var(--card-text); margin-bottom: 10px;">Submission Slots Status</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                      <div style="background: var(--card-bg); padding: 15px; border-radius: 3px; border: 1px solid var(--card-border); text-align: center;">
+                        <div style="font-size: 11px; color: var(--card-text-muted); text-transform: uppercase;">Slots Purchased</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--card-text); margin-top: 5px;" id="statPurchased">0</div>
+                      </div>
+                      <div style="background: var(--card-bg); padding: 15px; border-radius: 3px; border: 1px solid var(--card-border); text-align: center;">
+                        <div style="font-size: 11px; color: var(--card-text-muted); text-transform: uppercase;">Slots Uploaded</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--card-text); margin-top: 5px;" id="statUsed">0</div>
+                      </div>
+                      <div style="background: var(--card-bg); padding: 15px; border-radius: 3px; border: 1px solid var(--card-border); text-align: center;">
+                        <div style="font-size: 11px; color: var(--card-text-muted); text-transform: uppercase;">Slots Remaining</div>
+                        <div style="font-size: 24px; font-weight: 700; color: var(--card-text); margin-top: 5px;" id="statRemaining">0</div>
+                      </div>
+                    </div>
+
+                    <!-- Progress bar -->
+                    <div style="height: 6px; background: rgba(0,0,0,0.1); border-radius: 3px; overflow: hidden; margin-bottom: 15px;">
+                      <div id="slotsProgress" style="height: 100%; width: 0%; background: #fff; transition: width 0.3s ease;"></div>
+                    </div>
+
+                    <!-- Slot purchase actions -->
+                    <div id="buySlotPanel" style="display: flex; flex-direction: column; gap: 15px; padding: 20px; background: var(--card-bg); border-radius: 4px; border: 1px solid var(--card-border);">
+                      <div>
+                        <div style="font-size: 14px; font-weight: 700; color: var(--card-text);">Buy Upload Slots (Razorpay Payment)</div>
+                        <div style="font-size: 12px; color: var(--card-text-muted); margin-top: 2px;">Select a photography category to purchase an upload slot. (Max 7 total slots per artist).</div>
+                      </div>
+                      <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                        <div class="c-select-wrapper" style="flex: 1; min-width: 200px; position: relative;">
+                          <select id="buyCategorySelect" class="p-contact-main__input" style="margin-top: 0; appearance: none; -webkit-appearance: none; padding: 10px 15px; height: auto;" onchange="updateBuyButtonText()">
+                            <option value="Landscape">Landscape</option>
+                            <option value="Portrait">Portrait</option>
+                            <option value="Street">Street</option>
+                            <option value="Wedding">Wedding</option>
+                            <option value="Wild Life">Wild Life</option>
+                            <option value="Drone Photography">Drone Photography</option>
+                            <option value="Mobile Photography">Mobile Photography</option>
+                          </select>
+                        </div>
+                        <button id="buySlotBtn" onclick="handleBuySlot()" class="c-btn" style="padding: 12px 20px; font-size: 12px; width: auto; flex-shrink: 0; height: auto; border: none; background: #fff; color: var(--card-text); cursor: pointer;">Pay & Book Slot</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Submit Photo Form -->
+                <div class="p-contact-main__form" id="uploadFormCard" style="display: block;">
+                  <div style="margin-bottom: 30rem; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 15rem;">
+                    <h3 style="font-size:20px; color:var(--card-text); font-weight:700;" class="u-en" id="uploadFormTitle">SUBMIT NEW ENTRY</h3>
+                    <p style="font-size:12px; color: var(--card-text-muted); margin-top:2px;">Select an unused slot and upload your submission</p>
+                  </div>
+                  
+                  <div id="noSlotsMessage" style="display: none; padding: 25px 15px; background: var(--card-bg); backdrop-filter: blur(12px); border: 1px solid var(--card-border);; border: 1px dashed rgba(0,0,0,0.15); border-radius: 4px; text-align: center; color: var(--card-text-muted); font-size: 13px;">
+                    Please purchase upload slots above to submit your entries.
+                  </div>
+
+                  <form id="uploadForm" onsubmit="handleUpload(event)">
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="upSlotSelect">Choose Slot</label>
+                      <select id="upSlotSelect" class="p-contact-main__input" style="background: transparent; border: none; border-bottom: 1px solid #000; padding: 20rem 0; color: var(--card-text); outline: none; border-radius: 0;" required>
+                        <!-- Slots options populated dynamically -->
+                      </select>
+                    </div>
+
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="upTitle">Artwork Title</label>
+                      <input type="text" id="upTitle" class="p-contact-main__input" required placeholder="Enter the title of your artwork">
+                    </div>
+                    
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="upDivision">Category Division / Contest Theme</label>
+                      <select id="upDivision" class="p-contact-main__input" style="background: transparent; border: none; border-bottom: 1px solid #000; padding: 20rem 0; color: var(--card-text); outline: none; border-radius: 0;" required>
+                        <option value="" disabled selected>Select a theme</option>
+                        <option value="Portrait">Portrait</option>
+                        <option value="Landscape">Landscape</option>
+                        <option value="Street">Street</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Wild Life">Wild Life</option>
+                        <option value="Drone Photography">Drone Photography</option>
+                        <option value="Mobile Photography">Mobile Photography</option>
+                      </select>
+                    </div>
+                    
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required" for="upDesc">Description / Concept</label>
+                      <textarea id="upDesc" class="p-contact-main__textarea" required placeholder="Describe your creative vision, camera gear, and concept..."></textarea>
+                    </div>
+                    
+                    <div class="p-contact-main__row">
+                      <label class="p-contact-main__label --required">Photo File</label>
+                      <div class="c-file-drop" onclick="triggerFileInput()" style="border: 1px dashed var(--card-border); background: var(--card-bg); color: var(--card-text-light); padding: 30px; text-align: center; cursor: pointer; border-radius: 4px; margin-top: 10px;">
+                        <div class="c-file-drop__icon" style="font-size: 24px; margin-bottom: 5px; color: var(--card-text-muted);">↑</div>
+                        <div class="c-file-drop__text" style="font-weight: 600; font-size: 13rem;">Click to choose image or drag & drop here</div>
+                        <div class="c-file-drop__text" style="font-size:11px; color: var(--card-text-muted); margin-top:5px;">Supports JPEG / PNG (Max 5MB)</div>
+                      </div>
+                      <input type="file" id="upFile" style="display: none;" accept="image/jpeg, image/png" onchange="previewImage(event)">
+                      
+                      <div id="imgPreviewWrap" class="c-preview-img-wrap" style="display: none; margin-top: 15px; border-radius: 4px; overflow: hidden; max-width: 300px; border: 1px solid rgba(0,0,0,0.1);">
+                        <img id="imgPreview" class="c-preview-img" src="#" alt="Preview" style="width: 100%; height: auto; display: block;">
+                      </div>
+                    </div>
+                    
+                    <button type="submit" class="p-contact-main__link" style="border: none; background: none; text-align: left; margin-top: 20px; cursor: pointer;">
+                      <span>Upload and Submit Entry</span>
+                      <img src="../wp-content/themes/captura/assets/images/icons/curve-arrow.svg" alt="" class="p-contact-main__icon--arrow">
+                    </button>
+                  </form>
+                </div>
+                
+                <!-- My Submissions -->
+                <div style="margin-top: 50rem; background: var(--card-bg); border-radius: 8px; padding: 40rem 40rem 60rem; border: 1px solid var(--card-border); backdrop-filter: blur(20px);">
+                  <div style="margin-bottom: 24rem;">
+                    <h3 style="font-size:20px; color:var(--card-text); font-weight:700;" class="u-en">YOUR PORTFOLIO ENTRIES</h3>
+                    <p style="font-size:12px; color: var(--card-text-muted); margin-top:2px;">Contest submissions associated with your account</p>
+                  </div>
+                  <div id="submissionsList" class="p-sub-list">
+                    <!-- Submissions rendered dynamically -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="l-footer">
+        <div class="l-footer__breadcrumb">
+          <div class="l-footer__breadcrum-body">
+            <ul class="c-breadcrumb-ul u-en-sub">
+              <li class="c-breadcrumb-list"><a class="c-breadcrumb-link" href="../index.html"><span data-scramble>Home</span></a></li>
+              <li class="c-breadcrumb-list"><span>Login / Register</span></li>
+            </ul>
+          </div>
+          <div class="l-footer__backtop">
+            <button class="l-footer__backtop-button">
+              <span class="text u-en-sub" data-scramble><span>[Back to Top]</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="l-footer__inner">
+          <div class="l-footer__flex">
+            <div class="l-footer__info">
+              <a href="../contact/index.html" class="l-footer__contact-card" data-scale data-hover-target>
+          <p class="title u-en" data-hover-target-text>Inquiries</p>
+          <p class="text">Feel free to contact us via form or email for sponsorships, stalls, or entry inquiries.</p>
+          <div class="round"></div>
+          <div class="l-footer__contact-card-scale">
+            <div class="l-footer__contact-card-lines">
+              <span class="l-footer__contact-card-line" style="left:0px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:6px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:12px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:18px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:24px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:30px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:36px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:42px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:48px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:54px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:60px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:66px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:72px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:78px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:84px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:90px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:96px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:102px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:108px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:114px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:120px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:126px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:132px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:138px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:144px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:150px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:156px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:162px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:168px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:174px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:180px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:186px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:192px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:198px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:204px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:210px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:216px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:222px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:228px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:234px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:240px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:246px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:252px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:258px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:264px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:270px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:276px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:282px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:288px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:294px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:300px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:306px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:312px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:318px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:324px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:330px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:336px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:342px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:348px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:354px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:360px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:366px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:372px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:378px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:384px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:390px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:396px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:402px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:408px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:414px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:420px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:426px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:432px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:438px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:444px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:450px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:456px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:462px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:468px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:474px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:480px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:486px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:492px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:498px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:504px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:510px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:516px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:522px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:528px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:534px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:540px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:546px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:552px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:558px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:564px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:570px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:576px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:582px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:588px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:594px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:600px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:606px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:612px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:618px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:624px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:630px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:636px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:642px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:648px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:654px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:660px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:666px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:672px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:678px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:684px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:690px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:696px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:702px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:708px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:714px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:720px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:726px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:732px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:738px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:744px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:750px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:756px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:762px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:768px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:774px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:780px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:786px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:792px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:798px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:804px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:810px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:816px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:822px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:828px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:834px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:840px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:846px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:852px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:858px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:864px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:870px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:876px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:882px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:888px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:894px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:900px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:906px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:912px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:918px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:924px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:930px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:936px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:942px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:948px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:954px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:960px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:966px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:972px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:978px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:984px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:990px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:996px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1002px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1008px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1014px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1020px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1026px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1032px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1038px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1044px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1050px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1056px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1062px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1068px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1074px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1080px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1086px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1092px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1098px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1104px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1110px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1116px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1122px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1128px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1134px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1140px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1146px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1152px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1158px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1164px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1170px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1176px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1182px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1188px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1194px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1200px" data-scale-line></span></div>
+          </div>
+          <div class="l-footer__contact-card-arrow">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="black" />
+              <path d="M8 4L12.5 8.5L8 13" stroke="black" />
+            </svg>
+          </div>
+        </a>
+              <div class="l-footer__tel-card">
+          <div class="icon">
+            <img src="../wp-content/themes/captura/assets/images/common/tel.svg" alt="Tel Icon">
+          </div>
+          <div class="contents">
+            <p class="number u-en-sub">+91 422 261 1837</p>
+            <p class="text">Mon - Sat: 9:00 AM - 5:00 PM</p>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+            </div>
+            <div class="l-footer__navigation">
+              <div class="l-footer__navigation-main">
+                <ul class="l-footer__navigation-main-ul">
+            <li class="l-footer__navigation-main-li u-en"><a href="../index.html"><span data-scramble>Home</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../about/index.html"><span data-scramble>About</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../prizes/index.html"><span data-scramble>Prizes</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../schedule/index.html"><span data-scramble>Schedule</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../jury/index.html"><span data-scramble>Jury</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../registration/index.html"><span data-scramble>Login / Register</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../gallery/index.html"><span data-scramble>Gallery</span></a></li>
+            <li class="l-footer__navigation-main-li u-en"><a href="../contact/index.html"><span data-scramble>Contact</span></a></li>
+          </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!-- Database & Forms Controller Logic inside container so Barba executes it -->
+      <script>
+        // Variables
+        let currentUser = null;
+        let selectedImageBase64 = "";
+
+        // Tab Navigation Logic
+        const suTabBtn = document.getElementById('tabSignupBtn');
+        const liTabBtn = document.getElementById('tabLoginBtn');
+        const suCard = document.getElementById('signupFormCard');
+        const liCard = document.getElementById('loginFormCard');
+
+        if (suTabBtn && liTabBtn) {
+          suTabBtn.addEventListener('click', () => {
+            suTabBtn.classList.add('is-active');
+            suTabBtn.style.color = '#000';
+            liTabBtn.classList.remove('is-active');
+            liTabBtn.style.color = '#888';
+            suCard.style.display = 'block';
+            liCard.style.display = 'none';
+          });
+
+          liTabBtn.addEventListener('click', () => {
+            liTabBtn.classList.add('is-active');
+            liTabBtn.style.color = '#000';
+            suTabBtn.classList.remove('is-active');
+            suTabBtn.style.color = '#888';
+            liCard.style.display = 'block';
+            suCard.style.display = 'none';
+          });
+        }
+
+        // Trigger File Input click
+        function triggerFileInput() {
+          document.getElementById('upFile').click();
+        }
+
+        // Preview uploaded image and store base64
+        function previewImage(event) {
+          const file = event.target.files[0];
+          if (!file) return;
+
+          // Validate size (max 5MB)
+          if (file.size > 5 * 1024 * 1024) {
+            showAlert('danger', 'File size is too large. Please select an image under 5MB.');
+            document.getElementById('upFile').value = '';
+            return;
+          }
+
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            selectedImageBase64 = e.target.result;
+            const preview = document.getElementById('imgPreview');
+            const previewWrap = document.getElementById('imgPreviewWrap');
+            
+            preview.src = selectedImageBase64;
+            previewWrap.style.display = 'block';
+          }
+          reader.readAsDataURL(file);
+        }
+
+        // Alerts helper
+        function showAlert(type, message) {
+          const alertBox = document.getElementById('alertBox');
+          if (!alertBox) return;
+          alertBox.style.backgroundColor = type === 'success' ? '#d4edda' : '#f8d7da';
+          alertBox.style.color = type === 'success' ? '#155724' : '#721c24';
+          alertBox.style.border = `1px solid ${type === 'success' ? '#c3e6cb' : '#f5c6cb'}`;
+          alertBox.innerText = message;
+          alertBox.style.display = 'block';
+          window.scrollTo({ top: alertBox.offsetTop - 100, behavior: 'smooth' });
+        }
+
+        function clearAlert() {
+          const alertBox = document.getElementById('alertBox');
+          if (alertBox) alertBox.style.display = 'none';
+        }
+
+        // Form handlers using Firebase Authentication
+        function handleSignup(event) {
+          event.preventDefault();
+          clearAlert();
+
+          const name = document.getElementById('suName').value.trim();
+          const email = document.getElementById('suEmail').value.trim().toLowerCase();
+          const password = document.getElementById('suPassword').value;
+          const social = document.getElementById('suSocial').value.trim();
+          const bio = document.getElementById('suBio').value.trim();
+
+          if (!window.CapturaDB || !window.CapturaDB.isSynced) {
+            showAlert('danger', 'Database service is currently offline or syncing. Please wait.');
+            return;
+          }
+
+          showAlert('success', 'Creating Firebase Account...');
+
+          firebase.auth().createUserWithEmailAndPassword(email, password)
+            .then(async (userCredential) => {
+              const user = userCredential.user;
+              const newUser = {
+                name: name,
+                email: email,
+                social: social,
+                bio: bio,
+                purchasedSlots: [],
+                slotsPurchased: 0,
+                slotsUsed: 0
+              };
+              
+              // Save user details to Firestore
+              await firebase.firestore().collection('users').doc(email).set(newUser);
+              
+              // Update local cache user list
+              const usersSnap = await firebase.firestore().collection('users').get();
+              let usersList = [];
+              usersSnap.forEach(doc => usersList.push(doc.data()));
+              window.CapturaDB.setLocalStorage('npa_users', usersList);
+              
+              window.CapturaDB.setCurrentUser(newUser);
+
+              showAlert('success', 'Account registered successfully! Opening dashboard...');
+              document.getElementById('signupForm').reset();
+              setTimeout(() => {
+                initAppView();
+              }, 1000);
+            })
+            .catch(error => {
+              showAlert('danger', `Registration failed: ${error.message}`);
+            });
+        }
+
+        function handleLogin(event) {
+          event.preventDefault();
+          clearAlert();
+
+          const email = document.getElementById('liEmail').value.trim().toLowerCase();
+          const password = document.getElementById('liPassword').value;
+
+          if (!window.CapturaDB || !window.CapturaDB.isSynced) {
+            showAlert('danger', 'Database service is currently offline or syncing. Please wait.');
+            return;
+          }
+
+          showAlert('success', 'Authenticating...');
+
+          firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(async (userCredential) => {
+              const user = userCredential.user;
+              
+              // Load the user's details from Firestore
+              const docSnap = await firebase.firestore().collection('users').doc(email).get();
+              if (docSnap.exists) {
+                currentUser = docSnap.data();
+                window.CapturaDB.setCurrentUser(currentUser);
+              }
+
+              showAlert('success', 'Login successful! Opening dashboard...');
+              setTimeout(() => {
+                initAppView();
+              }, 1000);
+            })
+            .catch(error => {
+              showAlert('danger', `Login failed: ${error.message}`);
+            });
+        }
+
+        function handleGoogleSignIn() {
+          clearAlert();
+          if (!window.CapturaDB || !window.CapturaDB.isSynced) {
+            showAlert('danger', 'Database service is currently offline or syncing. Please wait.');
+            return;
+          }
+
+          showAlert('success', 'Opening Google Sign-In...');
+          const provider = new firebase.auth.GoogleAuthProvider();
+          firebase.auth().signInWithPopup(provider)
+            .then(async (result) => {
+              const user = result.user;
+              showAlert('success', `Signed in successfully as ${user.displayName || user.email}!`);
+              setTimeout(() => {
+                initAppView();
+              }, 1000);
+            })
+            .catch(error => {
+              showAlert('danger', `Google Sign-In failed: ${error.message}`);
+            });
+        }
+
+        function handleLogout() {
+          currentUser = null;
+          if (window.CapturaDB) {
+            window.CapturaDB.logout();
+          } else {
+            localStorage.removeItem('npa_current_user');
+          }
+          initAppView();
+          showAlert('success', 'Logged out successfully.');
+        }
+
+        function updateBuyButtonText() {
+          if (!window.CapturaDB) return;
+          const select = document.getElementById('buyCategorySelect');
+          if (!select) return;
+          const category = select.value;
+          const pricing = window.CapturaDB.getPricing();
+          const price = pricing[category] !== undefined ? pricing[category] : 999;
+          
+          const btn = document.getElementById('buySlotBtn');
+          if (btn) {
+            btn.innerText = `Pay & Book Slot (${price} INR)`;
+          }
+        }
+
+        // Slot purchase handler using Razorpay
+        function handleBuySlot() {
+          clearAlert();
+          if (!currentUser) return;
+
+          if (!currentUser.purchasedSlots) {
+            currentUser.purchasedSlots = [];
+          }
+
+          if (currentUser.purchasedSlots.length >= 7) {
+            showAlert('danger', 'Maximum limit of 7 slots reached.');
+            return;
+          }
+
+          const select = document.getElementById('buyCategorySelect');
+          const category = select.value;
+          const pricing = window.CapturaDB.getPricing();
+          const price = pricing[category] !== undefined ? pricing[category] : 999;
+
+          if (!window.CapturaDB) {
+            showAlert('danger', 'Database service offline. Please try again.');
+            return;
+          }
+
+          showAlert('success', 'Contacting Razorpay Gateway...');
+          
+          window.CapturaDB.initiatePayment(currentUser.email, category, price, function(err, paymentId) {
+            if (err) {
+              showAlert('danger', `Payment failed: ${err.message}`);
+              return;
+            }
+
+            // Create new paid slot object
+            const newSlot = {
+              id: 'slot_' + Date.now(),
+              category: category,
+              paymentId: paymentId,
+              used: false
+            };
+
+            currentUser.purchasedSlots.push(newSlot);
+            
+            // Backward compatible properties
+            currentUser.slotsPurchased = currentUser.purchasedSlots.length;
+            currentUser.slotsUsed = currentUser.purchasedSlots.filter(s => s.used).length;
+
+            const users = window.CapturaDB.getUsers();
+            const idx = users.findIndex(u => u.email === currentUser.email);
+            if (idx !== -1) {
+              users[idx].purchasedSlots = currentUser.purchasedSlots;
+              users[idx].slotsPurchased = currentUser.slotsPurchased;
+              users[idx].slotsUsed = currentUser.slotsUsed;
+              window.CapturaDB.saveUsers(users);
+            }
+            window.CapturaDB.setCurrentUser(currentUser);
+
+            showAlert('success', `Payment of ${price} INR Successful! 1 ${category} Upload Slot added.`);
+            initAppView();
+          });
+        }
+
+        // Handle photo entry upload
+        function handleUpload(event) {
+          event.preventDefault();
+          clearAlert();
+
+          if (!currentUser) {
+            showAlert('danger', 'Session expired. Please log in again.');
+            return;
+          }
+
+          const slotId = document.getElementById('upSlotSelect').value;
+          if (!slotId) {
+            showAlert('danger', 'Please select a valid paid slot.');
+            return;
+          }
+
+          const paidSlot = currentUser.purchasedSlots.find(s => s.id === slotId);
+          if (!paidSlot || paidSlot.used) {
+            showAlert('danger', 'This slot is invalid or already used.');
+            return;
+          }
+
+          if (!selectedImageBase64) {
+            showAlert('danger', 'Please select an image file for your entry.');
+            return;
+          }
+
+          const title = document.getElementById('upTitle').value.trim();
+          const division = paidSlot.category; // Autolocked category
+          const description = document.getElementById('upDesc').value.trim();
+
+          const submissions = window.CapturaDB ? window.CapturaDB.getSubmissions() : [];
+          const newSubId = 'sub_' + Date.now();
+
+          const newSubmission = {
+            id: newSubId,
+            slotNum: slotId,
+            userId: currentUser.email,
+            userName: currentUser.name,
+            userSocial: currentUser.social || '',
+            userBio: currentUser.bio || '',
+            title: title,
+            division: division,
+            description: description,
+            image: selectedImageBase64,
+            likes: 0,
+            likedBy: [],
+            comments: [],
+            date: new Date().toISOString()
+          };
+
+          submissions.unshift(newSubmission);
+          
+          showAlert('success', 'Uploading image to database...');
+
+          // Mark slot as used
+          paidSlot.used = true;
+          currentUser.slotsUsed = currentUser.purchasedSlots.filter(s => s.used).length;
+
+          // Save submissions and user
+          if (window.CapturaDB) {
+            window.CapturaDB.saveSubmissions(submissions);
+            const users = window.CapturaDB.getUsers();
+            const idx = users.findIndex(u => u.email === currentUser.email);
+            if (idx !== -1) {
+              users[idx].purchasedSlots = currentUser.purchasedSlots;
+              users[idx].slotsUsed = currentUser.slotsUsed;
+              window.CapturaDB.saveUsers(users);
+            }
+            window.CapturaDB.setCurrentUser(currentUser);
+          }
+
+          // Reset Form
+          document.getElementById('uploadForm').reset();
+          selectedImageBase64 = "";
+          document.getElementById('imgPreviewWrap').style.display = 'none';
+
+          showAlert('success', `Photo entry for ${division} uploaded successfully!`);
+          initAppView();
+        }
+
+        function renderSubmissions() {
+          const submissions = window.CapturaDB ? window.CapturaDB.getSubmissions() : [];
+          const mySubmissions = submissions.filter(s => s.userId === currentUser.email);
+          const listContainer = document.getElementById('submissionsList');
+
+          listContainer.innerHTML = '';
+
+          if (mySubmissions.length === 0) {
+            listContainer.innerHTML = '<div class="p-sub-empty" style="color: var(--card-text-muted); font-size:13px; text-align:center; padding: 20px;">You haven\'t uploaded any photo entries yet.</div>';
+            return;
+          }
+
+          mySubmissions.forEach(sub => {
+            const item = document.createElement('div');
+            item.className = 'p-sub-item';
+            item.style.display = 'flex';
+            item.style.gap = '20px';
+            item.style.background = '#fff';
+            item.style.padding = '15px';
+            item.style.borderRadius = '4px';
+            item.style.marginBottom = '15px';
+            item.style.border = '1px solid rgba(0,0,0,0.06)';
+            
+            item.innerHTML = `
+              <div class="p-sub-img-wrap" style="width: 100px; height: 100px; overflow: hidden; border-radius: 3px;">
+                <img class="p-sub-img" src="${sub.image}" alt="${sub.title}" style="width: 100%; height: 100%; object-fit: cover;">
+              </div>
+              <div class="p-sub-content" style="flex: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="font-size: 11px; color: #888; text-transform: uppercase;">Slot: ${escapeHtml(sub.division)}</div>
+                  <div class="p-sub-title" style="font-size: 16px; font-weight: 700; color: var(--card-text); margin-top: 2px;">${escapeHtml(sub.title)}</div>
+                  <div class="p-sub-division" style="font-size: 12px; color: var(--card-text-muted); margin-top: 2px;">${escapeHtml(sub.description)}</div>
+                </div>
+                <div class="p-sub-stats" style="display: flex; gap: 15px; font-size: 12px; color: var(--card-text-muted); margin-top: 5px;">
+                  <div class="p-sub-stat-item">♥ ${sub.likes} Likes</div>
+                  <div class="p-sub-stat-item">💬 ${sub.comments.length} Comments</div>
+                </div>
+              </div>
+            `;
+            listContainer.appendChild(item);
+          });
+        }
+
+        function escapeHtml(str) {
+          return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        // App state controller
+        function initAppView() {
+          currentUser = window.CapturaDB ? window.CapturaDB.getCurrentUser() : null;
+
+          const authView = document.getElementById('authView');
+          const dashboardView = document.getElementById('dashboardView');
+          const statusBox = document.getElementById('regStatusBox');
+
+          if (currentUser) {
+            authView.style.display = 'none';
+            dashboardView.style.display = 'block';
+            if (statusBox) statusBox.style.display = 'none';
+
+            // Profile fallback array initialization
+            if (!currentUser.purchasedSlots) {
+              currentUser.purchasedSlots = [];
+              // If older slots exist, backport them
+              const oldSlots = currentUser.slotsPurchased || 0;
+              const oldUsed = currentUser.slotsUsed || 0;
+              for (let i = 0; i < oldSlots; i++) {
+                currentUser.purchasedSlots.push({
+                  id: 'slot_legacy_' + i,
+                  category: 'Landscape',
+                  paymentId: 'legacy_payment',
+                  used: i < oldUsed
+                });
+              }
+            }
+
+            // Set profile info
+            document.getElementById('profName').innerText = currentUser.name;
+            document.getElementById('profEmail').innerText = currentUser.email;
+            document.getElementById('profSocial').innerHTML = currentUser.social ? `<a href="${currentUser.social}" target="_blank" style="color:#fff; text-decoration:underline;">${currentUser.social}</a>` : 'No social link registered';
+            document.getElementById('profBio').innerText = currentUser.bio || 'No artist statement registered';
+
+            // Update stats
+            const purchased = currentUser.purchasedSlots.length;
+            const used = currentUser.purchasedSlots.filter(s => s.used).length;
+            const remaining = purchased - used;
+
+            document.getElementById('statPurchased').innerText = purchased;
+            document.getElementById('statUsed').innerText = used;
+            document.getElementById('statRemaining').innerText = remaining;
+
+            // Update progress bar
+            const percent = purchased > 0 ? (used / purchased) * 100 : 0;
+            document.getElementById('slotsProgress').style.width = percent + '%';
+
+            // Update pricing text on buy button
+            updateBuyButtonText();
+
+            // Update upload panel state
+            const uploadFormCard = document.getElementById('uploadFormCard');
+            const noSlotsMessage = document.getElementById('noSlotsMessage');
+            const uploadForm = document.getElementById('uploadForm');
+
+            if (purchased === 0) {
+              uploadForm.style.display = 'none';
+              noSlotsMessage.style.display = 'block';
+              noSlotsMessage.innerText = "Please purchase upload slots to submit your entries.";
+            } else if (remaining === 0) {
+              uploadForm.style.display = 'none';
+              noSlotsMessage.style.display = 'block';
+              noSlotsMessage.innerText = "All purchased slots have been used. You can buy more slots (up to 7 total) using the panel above.";
+            } else {
+              uploadForm.style.display = 'block';
+              noSlotsMessage.style.display = 'none';
+
+              // Populate slot options dropdown
+              const slotSelect = document.getElementById('upSlotSelect');
+              slotSelect.innerHTML = '';
+              
+              const unusedSlots = currentUser.purchasedSlots.filter(s => !s.used);
+              unusedSlots.forEach(slot => {
+                const opt = document.createElement('option');
+                opt.value = slot.id;
+                opt.innerText = `${slot.category} (Slot #${slot.id.slice(-4)})`;
+                slotSelect.appendChild(opt);
+              });
+
+              // Automap slot selection to theme division dropdown and lock it
+              const divisionSelect = document.getElementById('upDivision');
+              slotSelect.onchange = () => {
+                const currentSlotId = slotSelect.value;
+                const activeSlot = currentUser.purchasedSlots.find(s => s.id === currentSlotId);
+                if (activeSlot && divisionSelect) {
+                  divisionSelect.value = activeSlot.category;
+                  divisionSelect.disabled = true;
+                }
+              };
+              slotSelect.onchange(); // trigger initial mapping
+            }
+
+            renderSubmissions();
+          } else {
+            authView.style.display = 'block';
+            dashboardView.style.display = 'none';
+            if (statusBox) statusBox.style.display = 'block';
+          }
+        }
+
+        // Live Real-Time sync update listener for contestant view
+        window.addEventListener('captura-db-synced', () => {
+          initAppView();
+        });
+
+        // Initialize page immediately
+        initAppView();
+      </script>
+    </div>
+  </div>
+  
+  <script src="../wp-content/themes/captura/assets/js/db.js?ver=8"></script>
+  <script type="module" src="../wp-content/themes/captura/assets/js/bundle/app.bundle31fb.js?ver=35"></script>
+  <script type="text/javascript" src="../cdn.jsdelivr.net/npm/%40barba/core%402.9.6/dist/barba.umd.min7d47.js?ver=2.9.6" id="barba-js"></script>
+  <script type="text/javascript" src="../cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min0567.js?ver=3.12.4" id="scrollTrigger-js"></script>
+</body>
+</html>

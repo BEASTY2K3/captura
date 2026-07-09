@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60" width="180" height="60">
+  <polygon points="15,42 27,15 39,42" fill="white" />
+  <polygon points="27,27 34,42 20,42" fill="black" />
+  <polygon points="27,15 20,31 34,31" fill="white" />
+  <text x="52" y="38" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="white" letter-spacing="0.5">Adobe</text>
+</svg>
