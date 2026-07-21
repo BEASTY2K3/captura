@@ -421,6 +421,38 @@
       border: 1px dashed rgba(255, 255, 255, 0.08);
     }
   </style>
+
+<style id="captura-logo-contrast-system">
+  /* CAPTURA Logo Contrast Rules: White on dark backgrounds, Black on white backgrounds */
+  img.logo, img.alternate-logo, img.navbar_logo, img.home-header_logo, 
+  img[src*="Captura"], img[src*="captura-logo"], .brand-link img, .logo-wrap img {
+    filter: brightness(0) invert(1) !important;
+    max-height: 48px !important;
+    object-fit: contain !important;
+    transition: filter 0.2s ease !important;
+  }
+
+  /* Black logo on explicitly light or white background containers */
+  .bg-light img[src*="Captura"], .bg-white img[src*="Captura"], 
+  .light-theme img[src*="Captura"], [style*="background: #ffffff"] img[src*="Captura"],
+  [style*="background:#fff"] img[src*="Captura"], [style*="background: white"] img[src*="Captura"] {
+    filter: brightness(0) !important;
+  }
+</style>
+
+<style id="captura-remove-webflow-badge">
+.w-webflow-badge, .w-webflow-badge * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+</style>
+
 </head>
 
 <body class="page-template page-template-page-whats-ykp">
@@ -599,70 +631,77 @@
         </div>
       </main>
 
-      <footer class="l-footer">
-        <div class="l-footer__breadcrumb">
-          <div class="l-footer__breadcrum-body">
-            <ul class="c-breadcrumb-ul u-en-sub">
-              <li class="c-breadcrumb-list"><a class="c-breadcrumb-link" href="../index.html"><span data-scramble>Home</span></a></li>
-              <li class="c-breadcrumb-list"><span>Gallery</span></li>
-            </ul>
-          </div>
-          <div class="l-footer__backtop">
-            <button class="l-footer__backtop-button">
-              <span class="text u-en-sub" data-scramble><span>[Back to Top]</span></span>
-            </button>
-          </div>
-        </div>
-        <div class="l-footer__inner">
-          <div class="l-footer__flex">
-            <div class="l-footer__info">
-              <a href="../contact/index.html" class="l-footer__contact-card" data-scale data-hover-target>
-          <p class="title u-en" data-hover-target-text>Inquiries</p>
-          <p class="text">Feel free to contact us via form or email for sponsorships, stalls, or entry inquiries.</p>
-          <div class="round"></div>
-          <div class="l-footer__contact-card-scale">
-            <div class="l-footer__contact-card-lines">
-              <span class="l-footer__contact-card-line" style="left:0px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:6px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:12px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:18px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:24px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:30px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:36px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:42px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:48px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:54px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:60px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:66px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:72px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:78px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:84px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:90px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:96px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:102px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:108px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:114px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:120px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:126px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:132px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:138px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:144px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:150px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:156px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:162px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:168px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:174px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:180px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:186px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:192px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:198px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:204px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:210px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:216px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:222px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:228px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:234px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:240px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:246px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:252px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:258px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:264px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:270px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:276px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:282px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:288px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:294px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:300px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:306px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:312px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:318px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:324px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:330px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:336px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:342px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:348px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:354px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:360px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:366px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:372px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:378px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:384px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:390px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:396px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:402px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:408px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:414px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:420px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:426px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:432px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:438px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:444px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:450px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:456px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:462px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:468px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:474px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:480px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:486px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:492px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:498px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:504px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:510px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:516px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:522px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:528px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:534px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:540px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:546px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:552px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:558px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:564px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:570px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:576px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:582px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:588px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:594px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:600px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:606px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:612px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:618px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:624px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:630px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:636px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:642px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:648px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:654px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:660px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:666px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:672px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:678px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:684px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:690px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:696px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:702px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:708px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:714px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:720px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:726px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:732px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:738px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:744px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:750px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:756px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:762px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:768px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:774px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:780px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:786px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:792px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:798px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:804px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:810px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:816px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:822px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:828px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:834px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:840px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:846px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:852px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:858px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:864px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:870px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:876px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:882px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:888px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:894px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:900px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:906px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:912px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:918px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:924px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:930px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:936px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:942px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:948px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:954px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:960px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:966px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:972px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:978px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:984px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:990px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:996px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1002px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1008px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1014px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1020px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1026px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1032px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1038px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1044px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1050px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1056px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1062px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1068px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1074px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1080px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1086px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1092px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1098px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1104px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1110px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1116px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1122px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1128px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1134px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1140px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1146px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1152px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1158px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1164px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1170px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1176px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1182px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1188px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1194px" data-scale-line></span><span class="l-footer__contact-card-line" style="left:1200px" data-scale-line></span></div>
-          </div>
-          <div class="l-footer__contact-card-arrow">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 0V6C0.999976 7 1.1 8.5 3.5 8.5C5.9 8.5 10.5 8.5 11.5 8.5" stroke="black" />
-              <path d="M8 4L12.5 8.5L8 13" stroke="black" />
-            </svg>
-          </div>
+      
+<!-- CAPTURA UNIFIED FOOTER -->
+<footer style="background-color:#0a0a0a; color:#ffffff; border-top:1px solid #222222; padding:60px 20px 30px; font-family:'Poppins', sans-serif;">
+  <div style="max-width:1150px; margin:0 auto;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; margin-bottom:50px;">
+      
+      <!-- Col 1: Brand Info -->
+      <div>
+        <a href="index.htm" style="display:inline-block; margin-bottom:15px;">
+          <img src="Captura png-01.png" style="max-height:48px; object-fit:contain;" alt="CAPTURA Logo">
         </a>
-              <div class="l-footer__tel-card">
-          <div class="icon">
-            <img src="../wp-content/themes/captura/assets/images/common/tel.svg" alt="Tel Icon">
-          </div>
-          <div class="contents">
-            <p class="number u-en-sub">+91 422 261 1837</p>
-            <p class="text">Mon - Sat: 9:00 AM - 5:00 PM</p>
-          </div>
+        <p style="color:#888888; font-size:14px; line-height:1.6; margin-bottom:15px;">
+          CAPTURA 2026 is India's premier national level photography competition bringing together visual artists and storytellers.
+        </p>
+        <div style="color:#d4af37; font-weight:700; font-size:13px; text-transform:uppercase;">
+          Organized by Mr.Media & YKR Productions
         </div>
       </div>
+      
+      <!-- Col 2: Navigation Links -->
+      <div>
+        <h4 style="color:#fff; font-size:16px; font-weight:700; margin-bottom:18px; text-transform:uppercase; border-bottom:2px solid #d4af37; padding-bottom:6px; display:inline-block;">Quick Links</h4>
+        <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:2.2;">
+          <li><a href="index.htm" style="color:#888888; text-decoration:none;">Home</a></li>
+          <li><a href="about.html" style="color:#888888; text-decoration:none;">About Captura</a></li>
+          <li><a href="prizes.html" style="color:#888888; text-decoration:none;">Prizes & 7 Themes</a></li>
+          <li><a href="schedule.html" style="color:#888888; text-decoration:none;">Timeline Schedule</a></li>
+          <li><a href="jury.html" style="color:#888888; text-decoration:none;">Jury Panel</a></li>
+          <li><a href="gallery.html" style="color:#888888; text-decoration:none;">Featured Gallery</a></li>
+          <li><a href="registration.html" style="color:#d4af37; font-weight:600; text-decoration:none;">Login / Register</a></li>
+        </ul>
       </div>
-            </div>
-            <div class="l-footer__navigation">
-              <div class="l-footer__navigation-main">
-                <ul class="l-footer__navigation-main-ul">
-            <li class="l-footer__navigation-main-li u-en"><a href="../index.html"><span data-scramble>Home</span></a></li>
-            <li class="l-footer__navigation-main-li u-en"><a href="../about/index.html"><span data-scramble>About</span></a></li>
-            <li class="l-footer__navigation-main-li u-en"><a href="../prizes/index.html"><span data-scramble>Prizes</span></a></li>
-            <li class="l-footer__navigation-main-li u-en"><a href="../schedule/index.html"><span data-scramble>Schedule</span></a></li>
-            <li class="l-footer__navigation-main-li u-en"><a href="../jury/index.html"><span data-scramble>Jury</span></a></li>
-            <li class="l-footer__navigation-main-li u-en"><a href="../registration/index.html"><span data-scramble>Login / Register</span></a></li>
-            <li class="l-footer__navigation-main-li u-en"><a href="../gallery/index.html"><span data-scramble>Gallery</span></a></li>
-            <li class="l-footer__navigation-main-li u-en"><a href="../contact/index.html"><span data-scramble>Contact</span></a></li>
-          </ul>
-              </div>
-            </div>
-          </div>
-          <div class="l-footer__bottom">
-            <p class="copyright u-en">&copy;CAPTURA</p>
-          </div>
-        </div>
-      </footer>
+
+      <!-- Col 3: Event & Venue Info -->
+      <div>
+        <h4 style="color:#fff; font-size:16px; font-weight:700; margin-bottom:18px; text-transform:uppercase; border-bottom:2px solid #d4af37; padding-bottom:6px; display:inline-block;">Event Location</h4>
+        <p style="color:#888888; font-size:14px; line-height:1.6; margin-bottom:10px;">
+          <strong style="color:#fff;">Hindusthan Engineering College</strong><br>
+          Coimbatore, Tamil Nadu, India
+        </p>
+        <p style="color:#888888; font-size:14px; line-height:1.6; margin-bottom:10px;">
+          <strong style="color:#fff;">Grand Event Date:</strong><br>
+          December 21st, 2026
+        </p>
+        <p style="color:#888888; font-size:14px; line-height:1.6;">
+          <strong style="color:#fff;">Title Sponsor:</strong> IIP
+        </p>
+      </div>
+
+      <!-- Col 4: Contact & Inquiries -->
+      <div>
+        <h4 style="color:#fff; font-size:16px; font-weight:700; margin-bottom:18px; text-transform:uppercase; border-bottom:2px solid #d4af37; padding-bottom:6px; display:inline-block;">Contact Us</h4>
+        <p style="color:#888888; font-size:14px; line-height:1.8; margin-bottom:10px;">
+          📞 <strong>Phone:</strong> +91 422 261 1837<br>
+          ✉️ <strong>Email:</strong> contact@captura2026.in<br>
+          🕒 <strong>Hours:</strong> Mon - Sat: 9:00 AM - 5:00 PM
+        </p>
+        <a href="registration.html" style="display:inline-block; background:#d4af37; color:#000; font-weight:700; padding:10px 20px; border-radius:4px; text-decoration:none; text-transform:uppercase; font-size:13px; margin-top:10px;">
+          Submit Photo Entry
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div style="border-top:1px solid #222222; padding-top:25px; text-align:center; color:#888888; font-size:13px;">
+      <p style="margin:0;">© 2026 CAPTURA National Photography Competition. All Rights Reserved. Organised by Mr.Media & YKR Productions.</p>
+    </div>
+  </div>
+</footer>
+
 
   <!-- Relocated interactive elements and scripts inside the Barba container -->
   <!-- INTERACTIVE DETAIL OVERLAY MODAL -->

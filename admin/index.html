@@ -309,6 +309,38 @@
       color: var(--card-text) !important;
     }
   </style>
+
+<style id="captura-logo-contrast-system">
+  /* CAPTURA Logo Contrast Rules: White on dark backgrounds, Black on white backgrounds */
+  img.logo, img.alternate-logo, img.navbar_logo, img.home-header_logo, 
+  img[src*="Captura"], img[src*="captura-logo"], .brand-link img, .logo-wrap img {
+    filter: brightness(0) invert(1) !important;
+    max-height: 48px !important;
+    object-fit: contain !important;
+    transition: filter 0.2s ease !important;
+  }
+
+  /* Black logo on explicitly light or white background containers */
+  .bg-light img[src*="Captura"], .bg-white img[src*="Captura"], 
+  .light-theme img[src*="Captura"], [style*="background: #ffffff"] img[src*="Captura"],
+  [style*="background:#fff"] img[src*="Captura"], [style*="background: white"] img[src*="Captura"] {
+    filter: brightness(0) !important;
+  }
+</style>
+
+<style id="captura-remove-webflow-badge">
+.w-webflow-badge, .w-webflow-badge * {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+</style>
+
 </head>
 
 <body class="page-template page-template-page-whats-ykp">
@@ -630,21 +662,77 @@
         </div>
       </main>
 
-      <footer class="l-footer">
-        <div class="l-footer__breadcrumb">
-          <div class="l-footer__breadcrum-body">
-            <ul class="c-breadcrumb-ul u-en-sub">
-              <li class="c-breadcrumb-list"><a class="c-breadcrumb-link" href="../index.html"><span data-scramble>Home</span></a></li>
-              <li class="c-breadcrumb-list"><span>Admin Portal</span></li>
-            </ul>
-          </div>
-          <div class="l-footer__backtop">
-            <button class="l-footer__backtop-button">
-              <span class="text u-en-sub" data-scramble><span>[Back to Top]</span></span>
-            </button>
-          </div>
+      
+<!-- CAPTURA UNIFIED FOOTER -->
+<footer style="background-color:#0a0a0a; color:#ffffff; border-top:1px solid #222222; padding:60px 20px 30px; font-family:'Poppins', sans-serif;">
+  <div style="max-width:1150px; margin:0 auto;">
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:40px; margin-bottom:50px;">
+      
+      <!-- Col 1: Brand Info -->
+      <div>
+        <a href="index.htm" style="display:inline-block; margin-bottom:15px;">
+          <img src="Captura png-01.png" style="max-height:48px; object-fit:contain;" alt="CAPTURA Logo">
+        </a>
+        <p style="color:#888888; font-size:14px; line-height:1.6; margin-bottom:15px;">
+          CAPTURA 2026 is India's premier national level photography competition bringing together visual artists and storytellers.
+        </p>
+        <div style="color:#d4af37; font-weight:700; font-size:13px; text-transform:uppercase;">
+          Organized by Mr.Media & YKR Productions
         </div>
-      </footer>
+      </div>
+      
+      <!-- Col 2: Navigation Links -->
+      <div>
+        <h4 style="color:#fff; font-size:16px; font-weight:700; margin-bottom:18px; text-transform:uppercase; border-bottom:2px solid #d4af37; padding-bottom:6px; display:inline-block;">Quick Links</h4>
+        <ul style="list-style:none; padding:0; margin:0; font-size:14px; line-height:2.2;">
+          <li><a href="index.htm" style="color:#888888; text-decoration:none;">Home</a></li>
+          <li><a href="about.html" style="color:#888888; text-decoration:none;">About Captura</a></li>
+          <li><a href="prizes.html" style="color:#888888; text-decoration:none;">Prizes & 7 Themes</a></li>
+          <li><a href="schedule.html" style="color:#888888; text-decoration:none;">Timeline Schedule</a></li>
+          <li><a href="jury.html" style="color:#888888; text-decoration:none;">Jury Panel</a></li>
+          <li><a href="gallery.html" style="color:#888888; text-decoration:none;">Featured Gallery</a></li>
+          <li><a href="registration.html" style="color:#d4af37; font-weight:600; text-decoration:none;">Login / Register</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Event & Venue Info -->
+      <div>
+        <h4 style="color:#fff; font-size:16px; font-weight:700; margin-bottom:18px; text-transform:uppercase; border-bottom:2px solid #d4af37; padding-bottom:6px; display:inline-block;">Event Location</h4>
+        <p style="color:#888888; font-size:14px; line-height:1.6; margin-bottom:10px;">
+          <strong style="color:#fff;">Hindusthan Engineering College</strong><br>
+          Coimbatore, Tamil Nadu, India
+        </p>
+        <p style="color:#888888; font-size:14px; line-height:1.6; margin-bottom:10px;">
+          <strong style="color:#fff;">Grand Event Date:</strong><br>
+          December 21st, 2026
+        </p>
+        <p style="color:#888888; font-size:14px; line-height:1.6;">
+          <strong style="color:#fff;">Title Sponsor:</strong> IIP
+        </p>
+      </div>
+
+      <!-- Col 4: Contact & Inquiries -->
+      <div>
+        <h4 style="color:#fff; font-size:16px; font-weight:700; margin-bottom:18px; text-transform:uppercase; border-bottom:2px solid #d4af37; padding-bottom:6px; display:inline-block;">Contact Us</h4>
+        <p style="color:#888888; font-size:14px; line-height:1.8; margin-bottom:10px;">
+          📞 <strong>Phone:</strong> +91 422 261 1837<br>
+          ✉️ <strong>Email:</strong> contact@captura2026.in<br>
+          🕒 <strong>Hours:</strong> Mon - Sat: 9:00 AM - 5:00 PM
+        </p>
+        <a href="registration.html" style="display:inline-block; background:#d4af37; color:#000; font-weight:700; padding:10px 20px; border-radius:4px; text-decoration:none; text-transform:uppercase; font-size:13px; margin-top:10px;">
+          Submit Photo Entry
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div style="border-top:1px solid #222222; padding-top:25px; text-align:center; color:#888888; font-size:13px;">
+      <p style="margin:0;">© 2026 CAPTURA National Photography Competition. All Rights Reserved. Organised by Mr.Media & YKR Productions.</p>
+    </div>
+  </div>
+</footer>
+
 
       <!-- Admin Logic -->
       <script>
